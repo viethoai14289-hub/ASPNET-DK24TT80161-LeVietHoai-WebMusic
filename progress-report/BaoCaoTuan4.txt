@@ -1,0 +1,44 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 4
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 22/06/2026 - 28/06/2026
+**Giai đoạn:** Chức năng phía Quản trị (Back-end)
+
+## 1. MỤC TIÊU TUẦN
+
+* Hoàn thiện trang quản trị (Admin) sử dụng **Site2.Master**.
+* Xây dựng đầy đủ các chức năng CRUD cho từng thực thể.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Xây dựng trang **Đăng nhập/Đăng ký** tài khoản quản trị.
+* Xây dựng các trang danh sách:
+
+  * DSBaiHat
+  * DSCaSi
+  * DSAlbum
+  * DSTheLoai
+  * DSChuDe
+  * DSPlayList
+  * DSCaSiAB
+  * DSCaSiBH
+  * DSPlaylistBH
+* Xây dựng các trang **Thêm/Sửa** (ThemBaiHat, SuaBaiHat, ThemCaSi, SuaCaSi...).
+* Xây dựng các trang quản lý (QLBaiHat, QLCaSi, QLAlbum, QLTaiKhoan...).
+* Xử lý chức năng tải lên hình ảnh và tệp nhạc (.mp3) vào các thư mục **images/** và **audio/**.
+* Quản lý quan hệ giữa **Ca sĩ – Bài hát** và **Ca sĩ – Album**.
+
+## 3. KẾT QUẢ
+
+* Quản trị viên có thể thêm, sửa, xóa thành công toàn bộ dữ liệu và lưu vào cơ sở dữ liệu.
+
+## 4. KẾ HOẠCH TUẦN SAU
+
+* Xây dựng giao diện người dùng (Front-end) và chức năng phát nhạc.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Xây dựng chức năng Đăng nhập/Đăng ký, quản lý Bài hát và Album.
+* **Lê Thị Nhàn:** Quản lý Ca sĩ, Thể loại và Chủ đề.
+* **Đỗ Xuân Thủy:** Quản lý Playlist, các bảng quan hệ và xử lý tải lên tệp.

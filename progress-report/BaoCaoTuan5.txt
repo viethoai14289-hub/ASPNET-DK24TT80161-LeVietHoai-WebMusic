@@ -1,0 +1,39 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 5
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 29/06/2026 - 05/07/2026
+**Giai đoạn:** Giao diện người dùng (Front-end) & Phát nhạc
+
+## 1. MỤC TIÊU TUẦN
+
+* Xây dựng giao diện người dùng nghe nhạc sử dụng **Site1.Master**.
+* Tích hợp trình phát nhạc trực tuyến.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Xây dựng **Trang chủ (TrangChu)** với slideshow và các mục bài hát, ca sĩ, album nổi bật.
+* Xây dựng các trang danh sách và chi tiết:
+
+  * **BàiHát**, **ChiTietBaiHat** (phát nhạc và hiển thị lời bài hát).
+  * **CaSi**, **ChiTietCaSi**.
+  * **Album**, **ChiTietAlbum**.
+  * **ChuDe**, **ChiTietChuDe**.
+  * **TheLoai**.
+* Xây dựng trang **Playlist** và **ChiTietPlaylist** để người dùng nghe nhạc theo playlist.
+* Thiết kế giao diện theo phong cách **Dark Mode**, hỗ trợ **Responsive** cơ bản và tích hợp **Font Awesome**.
+* Xử lý phát tệp nhạc **.mp3** bằng thẻ **HTML5 Audio**.
+
+## 3. KẾT QUẢ
+
+* Người dùng có thể duyệt và nghe nhạc trực tiếp trên trình duyệt với hoạt động ổn định.
+
+## 4. KẾ HOẠCH TUẦN SAU
+
+* Xây dựng chức năng tìm kiếm, kiểm thử tổng thể hệ thống và hoàn thiện báo cáo.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Xây dựng Trang chủ và trang phát nhạc (**ChiTietBaiHat**).
+* **Lê Thị Nhàn:** Xây dựng các trang **CaSĩ**, **Album** và các trang chi tiết.
+* **Đỗ Xuân Thủy:** Xây dựng các trang **Playlist**, **ThểLoại**, **ChủĐề** và thiết kế CSS Responsive.

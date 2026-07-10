@@ -1,0 +1,41 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 6 (TUẦN CUỐI)
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 06/07/2026 - 09/07/2026
+**Giai đoạn:** Tìm kiếm, Kiểm thử, Hoàn thiện & Viết báo cáo
+
+## 1. MỤC TIÊU TUẦN
+
+* Hoàn thiện chức năng tìm kiếm bài hát.
+* Kiểm thử hệ thống (Test Cases) và khắc phục các lỗi phát sinh.
+* Hoàn thiện báo cáo đồ án và tài liệu bàn giao.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Xây dựng trang **TìmKiếm** với chức năng tìm kiếm bài hát theo từ khóa tên bài hát.
+* Thực hiện kiểm thử các chức năng:
+
+  * Đăng nhập hợp lệ/không hợp lệ.
+  * Đăng ký tài khoản mới.
+  * Thêm, sửa, xóa dữ liệu.
+  * Phát nhạc trên nhiều trình duyệt.
+* Rà soát và khắc phục các lỗi phát sinh, kiểm tra khả năng tương thích trên các trình duyệt **Google Chrome, Mozilla Firefox** và **Microsoft Edge**.
+* Hoàn thiện báo cáo đồ án (thư mục **thesis/**) và sắp xếp lại mã nguồn (thư mục **src/**).
+* Chuẩn bị script cơ sở dữ liệu (**setup/csdl.sql**) và các báo cáo tiến độ (thư mục **progress-report/**).
+
+## 3. KẾT QUẢ
+
+* Hệ thống đã hoàn thiện các chức năng cốt lõi, sẵn sàng bàn giao và bảo vệ đồ án.
+* Hoàn thành báo cáo đồ án và tệp **README** hướng dẫn cài đặt.
+
+## 4. ĐÁNH GIÁ CHUNG
+
+* **Ưu điểm:** Hoàn thiện các chức năng cơ bản, giao diện thân thiện, hệ thống quản trị đầy đủ.
+* **Hướng phát triển:** Tối ưu giao diện, bổ sung bảng xếp hạng, chức năng bình chọn và chia sẻ playlist.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Xây dựng chức năng tìm kiếm, tổng hợp báo cáo và hoàn thiện README.
+* **Lê Thị Nhàn:** Kiểm thử hệ thống và xây dựng Test Cases.
+* **Đỗ Xuân Thủy:** Khắc phục lỗi, sắp xếp mã nguồn và đóng gói sản phẩm bàn giao.

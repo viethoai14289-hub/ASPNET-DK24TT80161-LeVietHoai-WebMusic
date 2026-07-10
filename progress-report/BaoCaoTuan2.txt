@@ -1,0 +1,38 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 2
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 08/06/2026 - 14/06/2026
+**Giai đoạn:** Thiết kế Cơ sở dữ liệu & ERD
+
+## 1. MỤC TIÊU TUẦN
+
+* Thiết kế mô hình thực thể liên kết (ERD).
+* Xác định các bảng, khóa chính, khóa ngoại và các ràng buộc.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Xác định các bảng chính: **TàiKhoản, ThểLoại, ChủĐề, Album, CaSĩ, BàiHát, Playlist**.
+* Xác định các bảng trung gian (quan hệ nhiều - nhiều):
+
+  * `casi_album`
+  * `casi_baihat`
+  * `playlist_baihat`
+* Vẽ sơ đồ ERD và sơ đồ quan hệ (Database Diagram).
+* Viết script tạo cơ sở dữ liệu **"Nhaccuatui"** (`setup/csdl.sql`) trên SQL Server.
+* Xác định kiểu dữ liệu cho từng cột (nvarchar, int,...) và các cột cho phép giá trị `NULL`.
+
+## 3. KẾT QUẢ
+
+* Hoàn thành cơ sở dữ liệu mức vật lý, tạo thành công trên SQL Server.
+* Chuẩn bị dữ liệu mẫu (bài hát, ca sĩ, album...) để kiểm thử.
+
+## 4. KẾ HOẠCH TUẦN SAU
+
+* Dựng khung dự án ASP.NET, xây dựng các lớp Models và Controllers (truy xuất dữ liệu).
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Thiết kế ERD, viết `csdl.sql`.
+* **Lê Thị Nhàn:** Kiểm tra ràng buộc khóa ngoại, chuẩn bị dữ liệu mẫu.
+* **Đỗ Xuân Thủy:** Vẽ Database Diagram, mô tả từng bảng.

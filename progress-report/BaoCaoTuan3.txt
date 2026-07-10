@@ -1,0 +1,36 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 3
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 15/06/2026 - 21/06/2026
+**Giai đoạn:** Dựng khung dự án - Models & Controllers (DAL)
+
+## 1. MỤC TIÊU TUẦN
+
+* Tạo project ASP.NET (Web Forms) và xây dựng cấu trúc thư mục theo mô hình MVC.
+* Xây dựng các lớp Models và Controllers để truy xuất dữ liệu bằng ADO.NET.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Tạo Solution **"Nhom.sln"**, cấu hình **Web.config** và chuỗi kết nối cơ sở dữ liệu.
+* Xây dựng các lớp Model: **BàiHát, CaSĩ, Album, ChủĐề, ThểLoại, Playlist, PlaylistBH, CaSiAB, CaSiBH, TàiKhoản**.
+* Xây dựng các Controller truy xuất dữ liệu bằng ADO.NET (**SqlConnection, SqlCommand, SqlDataReader**), bao gồm các chức năng: lấy danh sách, thêm, sửa, xóa và lấy thông tin một bản ghi.
+* Chuẩn bị 2 Master Page:
+
+  * **Site1:** Giao diện người dùng (Front-end).
+  * **Site2:** Giao diện quản trị (Back-end/Admin).
+
+## 3. KẾT QUẢ
+
+* Kết nối thành công ứng dụng với cơ sở dữ liệu, việc đọc/ghi dữ liệu hoạt động ổn định.
+* Hoàn thiện tầng truy xuất dữ liệu (DAL) cho tất cả các thực thể.
+
+## 4. KẾ HOẠCH TUẦN SAU
+
+* Xây dựng các chức năng quản trị (Back-end): đăng nhập và thực hiện CRUD cho toàn bộ dữ liệu.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Cấu hình dự án, xây dựng Controllers cho BàiHát, CaSĩ và Album.
+* **Lê Thị Nhàn:** Xây dựng Controllers cho ThểLoại, ChủĐề và Playlist.
+* **Đỗ Xuân Thủy:** Xây dựng Models, các bảng trung gian và Master Page.

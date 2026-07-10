@@ -1,0 +1,34 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 1
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 01/06/2026 - 07/06/2026
+**Giai đoạn:** Khảo sát & Phân tích yêu cầu
+
+## 1. MỤC TIÊU TUẦN
+
+* Xác định đề tài, phạm vi và mục tiêu của đồ án.
+* Khảo sát các hệ thống nghe nhạc trực tuyến (Spotify, Zing MP3, Nhạc Của Tui...).
+* Xác định yêu cầu chức năng và phi chức năng.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Chốt đề tài **"Website nghe nhạc trực tuyến"** trên nền tảng C# / ASP.NET.
+* Khảo sát ưu, nhược điểm của các hệ thống liên quan để rút ra yêu cầu.
+* Liệt kê danh sách chức năng: phát nhạc, đăng ký/đăng nhập, tìm kiếm, quản lý bài hát, ca sĩ, album, thể loại, chủ đề, playlist, tài khoản.
+* Thống nhất sử dụng kiến trúc Model - Controller - View (MVC).
+* Phân công công việc cho 3 thành viên.
+
+## 3. KẾT QUẢ
+
+* Hoàn thành đề cương sơ bộ và bản mô tả yêu cầu hệ thống.
+
+## 4. KẾ HOẠCH TUẦN SAU
+
+* Thiết kế cơ sở dữ liệu (ERD) và các bảng dữ liệu.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Tổng hợp yêu cầu, viết đề cương.
+* **Lê Thị Nhàn:** Khảo sát hệ thống liên quan.
+* **Đỗ Xuân Thủy:** Liệt kê chức năng, phân rã actor.
