@@ -235,5 +235,5 @@ Trong tương lai, hệ thống có thể được mở rộng với các chức
 
 **Đồ án Chuyên đề ASP.NET – Website Nghe Nhạc Trực Tuyến**
 **Lớp:** DK24TT80161
-**Giảng viên hướng dẫn:** TS. Đoàn Phước Miên
+**Giảng viên hướng dẫn:** TS. Đoàn Phước Miền
 **Năm học:** 2026
