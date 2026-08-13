@@ -8,11 +8,14 @@
 ## 1. MỤC TIÊU TUẦN
 
 * Rà soát lại các chức năng đã xây dựng, tinh chỉnh mã nguồn cho gọn ổn.
+* Migration giao diện sang Bootstrap 5.3 + jQuery 3.7.
 * Bắt đầu viết lại báo cáo đồ án theo tiến độ thực tế.
 
 ## 2. CÔNG VIỆC ĐÃ LÀM
 
 * Rà soát chức năng CRUD của khu quản trị, chỉnh lại luồng thêm/sửa/xóa cho nhất quán.
+* Migration giao diện: thay CSS/JS thuần bằng Bootstrap 5.3.3 (dark mode cho khu người dùng, light cho khu quản trị) + jQuery 3.7.1 qua CDN.
+* Viết lại 2 layout + toàn bộ view (khu người dùng và khu quản trị) dùng component Bootstrap (navbar, card grid, table, form, carousel thay slideshow cũ).
 * Kiểm tra lại chức năng phát nhạc và hiển thị lời bài hát trên trang chi tiết.
 * Chuẩn bị dàn ý mới cho báo cáo đồ án, sắp xếp lại các mục nội dung.
 

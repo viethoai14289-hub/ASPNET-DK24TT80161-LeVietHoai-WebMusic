@@ -1,14 +1,29 @@
 @model ChuDe
 @{ ViewData["Title"] = "Sửa chủ đề"; }
-<h1>Sửa chủ đề</h1>
+<h1 class="h3 mb-3">Sửa chủ đề</h1>
 @if (!string.IsNullOrEmpty(Model.HinhAnh))
-{ <img src="~/images/chude/@Model.HinhAnh" alt="" class="thumb" /> }
-<form method="post" enctype="multipart/form-data" class="admin-form">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="MaChuDe" />
-    <label>Tên chủ đề <input asp-for="TenChuDe" /></label>
-    <label>Mô tả thêm <textarea asp-for="MoTaThem" rows="3"></textarea></label>
-    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
-    <button type="submit" class="btn-primary">Cập nhật</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+{
+    <img src="~/images/chude/@Model.HinhAnh" alt="" class="rounded mb-3" style="width:96px;height:96px;object-fit:cover" />
+}
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="MaChuDe" />
+            <div class="mb-3">
+                <label class="form-label">Tên chủ đề</label>
+                <input asp-for="TenChuDe" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mô tả thêm</label>
+                <textarea asp-for="MoTaThem" rows="3" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh mới (để trống nếu giữ nguyên)</label>
+                <input type="file" name="anh" accept="image/*" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

@@ -1,13 +1,25 @@
 @model Album
 @{ ViewData["Title"] = "Sửa album"; }
-<h1>Sửa album</h1>
+<h1 class="h3 mb-3">Sửa album</h1>
 @if (!string.IsNullOrEmpty(Model.HinhAnh))
-{ <img src="~/images/album/@Model.HinhAnh" alt="" class="thumb" /> }
-<form method="post" enctype="multipart/form-data" class="admin-form">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="MaAlbum" />
-    <label>Tên album <input asp-for="TenAlbum" /></label>
-    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
-    <button type="submit" class="btn-primary">Cập nhật</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+{
+    <img src="~/images/album/@Model.HinhAnh" alt="" class="rounded mb-3" style="width:96px;height:96px;object-fit:cover" />
+}
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="MaAlbum" />
+            <div class="mb-3">
+                <label class="form-label">Tên album</label>
+                <input asp-for="TenAlbum" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh mới (để trống nếu giữ nguyên)</label>
+                <input type="file" name="anh" accept="image/*" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

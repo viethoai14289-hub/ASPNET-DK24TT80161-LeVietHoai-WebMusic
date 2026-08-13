@@ -4,20 +4,26 @@
     var cs = ViewBag.CaSis as List<CaSi> ?? new();
     var bh = ViewBag.BaiHats as List<BaiHat> ?? new();
 }
-<h1>Sửa Ca sĩ - Bài hát</h1>
-<form method="post" class="admin-form">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
-    <label>Ca sĩ
-        <select asp-for="MaCaSi">
-            @foreach (var c in cs) { <option value="@c.MaCaSi" selected="@(c.MaCaSi == Model.MaCaSi)">@c.TenCaSi</option> }
-        </select>
-    </label>
-    <label>Bài hát
-        <select asp-for="MaBaiHat">
-            @foreach (var b in bh) { <option value="@b.MaBaiHat" selected="@(b.MaBaiHat == Model.MaBaiHat)">@b.TenBaiHat</option> }
-        </select>
-    </label>
-    <button type="submit" class="btn-primary">Cập nhật</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+<h1 class="h3 mb-3">Sửa Ca sĩ - Bài hát</h1>
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label class="form-label">Ca sĩ</label>
+                <select asp-for="MaCaSi" class="form-select">
+                    @foreach (var c in cs) { <option value="@c.MaCaSi" selected="@(c.MaCaSi == Model.MaCaSi)">@c.TenCaSi</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bài hát</label>
+                <select asp-for="MaBaiHat" class="form-select">
+                    @foreach (var b in bh) { <option value="@b.MaBaiHat" selected="@(b.MaBaiHat == Model.MaBaiHat)">@b.TenBaiHat</option> }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

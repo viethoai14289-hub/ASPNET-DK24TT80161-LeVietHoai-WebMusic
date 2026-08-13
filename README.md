@@ -35,7 +35,7 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 * **Nền tảng:** ASP.NET Core 8 MVC
 * **Cơ sở dữ liệu:** Microsoft SQL Server
 * **Truy xuất dữ liệu:** ADO.NET (`Microsoft.Data.SqlClient`)
-* **Giao diện:** HTML5, CSS3, JavaScript thuần (không Bootstrap, không jQuery)
+* **Giao diện:** HTML5, CSS3, JavaScript + **Bootstrap 5.3.3** + **jQuery 3.7.1**
 * **Xác thực:** Custom cookie authentication + BCrypt hash mật khẩu
 * **Quy trình phát triển:** Waterfall
 * **Công cụ phát triển:** Visual Studio, SQL Server Management Studio (SSMS), Git, GitHub
@@ -46,7 +46,7 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 
 ## Người dùng (Frontend)
 
-* Xem trang chủ với slideshow và 4 danh sách: thể loại, chủ đề, album, bài hát.
+* Xem trang chủ với slideshow (Bootstrap Carousel) và 4 danh sách: thể loại, chủ đề, album, bài hát.
 * Nghe nhạc trực tuyến bằng `<audio>` native, xem lời bài hát.
 * Xem danh sách và trang chi tiết của:
   * Bài hát
@@ -91,7 +91,8 @@ Mỗi service là một lớp injected qua DI, dùng `SqlConnection` + `SqlComma
 | Auth              | Custom cookie authentication               |
 | Hash mật khẩu     | BCrypt.Net-Next                            |
 | Views             | Razor + Tag Helpers                        |
-| CSS/JS            | CSS thuần, JS thuần (không Bootstrap/jQuery) |
+| CSS/JS            | Bootstrap 5.3.3 + jQuery 3.7.1 (CDN)       |
+| UI/UX             | Dark theme (FE, `data-bs-theme=dark`) + light (Admin) |
 
 ---
 
@@ -118,10 +119,8 @@ webmusicASP/
 │       ├── Models/       # 10 entity (POCO)
 │       ├── Services/     # 8 service + interface (ADO.NET)
 │       ├── ViewModels/   # DTO cho view phức tạp
-│       ├── Views/        # Razor views (FE) + _Layout dark responsive
+│       ├── Views/        # Razor views (FE) + _Layout (Bootstrap dark)
 │       ├── wwwroot/
-│       │   ├── css/site.css
-│       │   ├── js/site.js
 │       │   ├── images/
 │       │   └── audio/
 │       ├── Program.cs
@@ -215,7 +214,7 @@ progress-report/
 | Tuần 4  | 22/06/2026 – 28/06/2026 | Xây dựng chức năng quản trị (Back-end)                  |
 | Tuần 5  | 29/06/2026 – 05/07/2026 | Xây dựng giao diện người dùng và chức năng phát nhạc    |
 | Tuần 6  | 06/07/2026 – 12/07/2026 | Tìm kiếm, kiểm thử, hoàn thiện hệ thống và viết báo cáo |
-| Tuần 7  | 12/08/2026 – 18/08/2026 | Tinh chỉnh chức năng, bắt đầu viết lại báo cáo          |
+| Tuần 7  | 12/08/2026 – 18/08/2026 | Tinh chỉnh chức năng, migration UI sang Bootstrap + jQuery, viết lại báo cáo |
 | Tuần 8  | 19/08/2026 – 25/08/2026 | Hoàn thiện, kiểm thử và bàn giao đồ án                  |
 
 ---
@@ -226,7 +225,7 @@ Sau quá trình thực hiện, nhóm đã hoàn thành các nội dung sau:
 
 * Thiết kế và xây dựng cơ sở dữ liệu trên Microsoft SQL Server.
 * Xây dựng đầy đủ chức năng quản trị (CRUD) cho 10 thực thể.
-* Hoàn thiện giao diện người dùng (dark theme, responsive).
+* Hoàn thiện giao diện người dùng (Bootstrap dark theme, responsive) và khu quản trị (Bootstrap light theme).
 * Tích hợp chức năng phát nhạc trực tuyến bằng HTML5 Audio.
 * Hỗ trợ tìm kiếm trên 6 thực thể với 1 từ khóa.
 * Xác thực cookie + mã hóa mật khẩu BCrypt.

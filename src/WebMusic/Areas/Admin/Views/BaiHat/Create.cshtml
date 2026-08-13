@@ -6,29 +6,51 @@
     var cds = ViewBag.ChuDes as List<ChuDe> ?? new();
 }
 
-<h1>Thêm bài hát</h1>
-<form method="post" enctype="multipart/form-data" class="admin-form">
-    @Html.AntiForgeryToken()
-    <label>Tên bài hát <input asp-for="TenBaiHat" /></label>
-    <label>Tác giả <input asp-for="TacGia" /></label>
-    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
-    <label>Link bài hát (tên file mp3) <input asp-for="LinkBaiHat" placeholder="vd: Co-Em-Cho-MIN-Mr-A.mp3" /></label>
-    <label>Thể loại
-        <select asp-for="MaTheLoai">
-            @foreach (var t in tls) { <option value="@t.MaTheLoai">@t.TenTheLoai</option> }
-        </select>
-    </label>
-    <label>Album
-        <select asp-for="MaAlbum">
-            @foreach (var a in abs) { <option value="@a.MaAlbum">@a.TenAlbum</option> }
-        </select>
-    </label>
-    <label>Chủ đề
-        <select asp-for="MaChuDe">
-            @foreach (var c in cds) { <option value="@c.MaChuDe">@c.TenChuDe</option> }
-        </select>
-    </label>
-    <label>Lời bài hát <textarea asp-for="LoiBaiHat" rows="5"></textarea></label>
-    <button type="submit" class="btn-primary">Lưu</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+<h1 class="h3 mb-3">Thêm bài hát</h1>
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="form-label">Tên bài hát</label>
+                <input asp-for="TenBaiHat" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tác giả</label>
+                <input asp-for="TacGia" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh</label>
+                <input type="file" name="anh" accept="image/*" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Link bài hát (tên file mp3)</label>
+                <input asp-for="LinkBaiHat" class="form-control" placeholder="vd: Co-Em-Cho-MIN-Mr-A.mp3" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Thể loại</label>
+                <select asp-for="MaTheLoai" class="form-select">
+                    @foreach (var t in tls) { <option value="@t.MaTheLoai">@t.TenTheLoai</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Album</label>
+                <select asp-for="MaAlbum" class="form-select">
+                    @foreach (var a in abs) { <option value="@a.MaAlbum">@a.TenAlbum</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Chủ đề</label>
+                <select asp-for="MaChuDe" class="form-select">
+                    @foreach (var c in cds) { <option value="@c.MaChuDe">@c.TenChuDe</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lời bài hát</label>
+                <textarea asp-for="LoiBaiHat" rows="5" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

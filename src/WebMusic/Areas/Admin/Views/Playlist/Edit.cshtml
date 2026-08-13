@@ -3,20 +3,36 @@
     ViewData["Title"] = "Sửa playlist";
     var tls = ViewBag.TheLoais as List<TheLoai> ?? new();
 }
-<h1>Sửa playlist</h1>
+<h1 class="h3 mb-3">Sửa playlist</h1>
 @if (!string.IsNullOrEmpty(Model.HinhAnh))
-{ <img src="~/images/playlist/@Model.HinhAnh" alt="" class="thumb" /> }
-<form method="post" enctype="multipart/form-data" class="admin-form">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="MaPlayList" />
-    <label>Tên playlist <input asp-for="TenPlayList" /></label>
-    <label>Người tạo <input asp-for="NguoiTao" /></label>
-    <label>Thể loại
-        <select asp-for="MaTheLoai">
-            @foreach (var t in tls) { <option value="@t.MaTheLoai" selected="@(t.MaTheLoai == Model.MaTheLoai)">@t.TenTheLoai</option> }
-        </select>
-    </label>
-    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
-    <button type="submit" class="btn-primary">Cập nhật</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+{
+    <img src="~/images/playlist/@Model.HinhAnh" alt="" class="rounded mb-3" style="width:96px;height:96px;object-fit:cover" />
+}
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="MaPlayList" />
+            <div class="mb-3">
+                <label class="form-label">Tên playlist</label>
+                <input asp-for="TenPlayList" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Người tạo</label>
+                <input asp-for="NguoiTao" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Thể loại</label>
+                <select asp-for="MaTheLoai" class="form-select">
+                    @foreach (var t in tls) { <option value="@t.MaTheLoai" selected="@(t.MaTheLoai == Model.MaTheLoai)">@t.TenTheLoai</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh mới (để trống nếu giữ nguyên)</label>
+                <input type="file" name="anh" accept="image/*" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-success">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

@@ -1,25 +1,23 @@
-﻿@model ErrorViewModel
+@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Lỗi";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="alert alert-danger">
+    <h1 class="h4 alert-heading">Đã xảy ra lỗi</h1>
+    <p class="mb-0">Đã có lỗi xảy ra khi xử lý yêu cầu của bạn.</p>
+</div>
 
 @if (Model.ShowRequestId)
 {
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
 }
 
-<h3>Development Mode</h3>
+<h3 class="h5 mt-4">Chế độ Development</h3>
 <p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+    Chuyển sang môi trường <strong>Development</strong> sẽ hiển thị thông tin chi tiết hơn về lỗi.
 </p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
+<p class="text-warning">
+    <strong>Không nên bật Development cho ứng dụng đã triển khai</strong> — có thể lộ thông tin nhạy cảm.
+    Để debug, đặt <strong>ASPNETCORE_ENVIRONMENT</strong> = <strong>Development</strong> rồi khởi động lại app.
 </p>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebMusic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e67327d47c3324b0afdffa39936c4db6d038c31d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+758536994e541c1f9df2aaaad0fc92afff354b72")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebMusic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebMusic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

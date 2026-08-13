@@ -1,13 +1,32 @@
 @model CaSi
 @{ ViewData["Title"] = "Thêm ca sĩ"; }
-<h1>Thêm ca sĩ</h1>
-<form method="post" enctype="multipart/form-data" class="admin-form">
-    @Html.AntiForgeryToken()
-    <label>Tên ca sĩ <input asp-for="TenCaSi" /></label>
-    <label>Năm sinh <input asp-for="NamSinh" type="number" /></label>
-    <label>Quê quán <input asp-for="QueQuan" /></label>
-    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
-    <label>Mô tả thêm <textarea asp-for="MoTaThem" rows="4"></textarea></label>
-    <button type="submit" class="btn-primary">Lưu</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+<h1 class="h3 mb-3">Thêm ca sĩ</h1>
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="form-label">Tên ca sĩ</label>
+                <input asp-for="TenCaSi" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Năm sinh</label>
+                <input asp-for="NamSinh" type="number" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quê quán</label>
+                <input asp-for="QueQuan" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ảnh</label>
+                <input type="file" name="anh" accept="image/*" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mô tả thêm</label>
+                <textarea asp-for="MoTaThem" rows="4" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

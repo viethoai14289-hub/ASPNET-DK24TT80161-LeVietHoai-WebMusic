@@ -4,19 +4,25 @@
     var cs = ViewBag.CaSis as List<CaSi> ?? new();
     var ab = ViewBag.Albums as List<Album> ?? new();
 }
-<h1>Thêm Ca sĩ - Album</h1>
-<form method="post" class="admin-form">
-    @Html.AntiForgeryToken()
-    <label>Ca sĩ
-        <select name="maCaSi">
-            @foreach (var c in cs) { <option value="@c.MaCaSi">@c.TenCaSi</option> }
-        </select>
-    </label>
-    <label>Album
-        <select name="maAlbum">
-            @foreach (var a in ab) { <option value="@a.MaAlbum">@a.TenAlbum</option> }
-        </select>
-    </label>
-    <button type="submit" class="btn-primary">Lưu</button>
-    <a asp-action="Index" class="btn-link">Hủy</a>
-</form>
+<h1 class="h3 mb-3">Thêm Ca sĩ - Album</h1>
+<div class="card" style="max-width:640px">
+    <div class="card-body">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="form-label">Ca sĩ</label>
+                <select name="maCaSi" class="form-select">
+                    @foreach (var c in cs) { <option value="@c.MaCaSi">@c.TenCaSi</option> }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Album</label>
+                <select name="maAlbum" class="form-select">
+                    @foreach (var a in ab) { <option value="@a.MaAlbum">@a.TenAlbum</option> }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a asp-action="Index" class="btn btn-link">Hủy</a>
+        </form>
+    </div>
+</div>

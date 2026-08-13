@@ -3,15 +3,17 @@
     ViewData["Title"] = "Album";
 }
 
-<section class="section">
-    <h2>Album</h2>
-    <div class="card-grid">
+<section class="mb-4">
+    <h2 class="h4 mb-3 border-start border-success ps-2">Album</h2>
+    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
         @foreach (var ab in Model)
         {
-            <a class="card" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
-                <img src="~/images/album/@ab.HinhAnh" alt="@ab.TenAlbum" />
-                <span>@ab.TenAlbum</span>
-            </a>
+            <div class="col">
+                <a class="card h-100 text-decoration-none text-body" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
+                    <img src="~/images/album/@ab.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@ab.TenAlbum" />
+                    <div class="card-body p-2"><span class="fw-semibold small">@ab.TenAlbum</span></div>
+                </a>
+            </div>
         }
     </div>
 </section>

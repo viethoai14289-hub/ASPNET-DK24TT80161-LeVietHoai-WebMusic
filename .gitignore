@@ -1,0 +1,5 @@
+# Claude Code local settings
+src/.claude/settings.local.json
+
+# VS Code workspace settings
+src/.vscode/settings.json

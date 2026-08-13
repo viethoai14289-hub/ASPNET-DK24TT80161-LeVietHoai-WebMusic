@@ -3,26 +3,30 @@
     ViewData["Title"] = "Tìm kiếm";
 }
 
-<h1>Kết quả tìm kiếm: "@Model.Query"</h1>
+<h1 class="h3 mb-4">Kết quả tìm kiếm: "@Model.Query"</h1>
 
 @if (string.IsNullOrWhiteSpace(Model.Query))
 {
-    <p class="muted">Nhập từ khóa vào ô tìm kiếm.</p>
+    <p class="text-muted">Nhập từ khóa vào ô tìm kiếm.</p>
     return;
 }
 
 @if (Model.BaiHats.Any())
 {
-    <section class="section">
-        <h2>Bài hát</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Bài hát</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var bh in Model.BaiHats)
             {
-                <a class="card" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
-                    <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" />
-                    <span>@bh.TenBaiHat</span>
-                    <small>@bh.TacGia</small>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                        <img src="~/images/baihat/@bh.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@bh.TenBaiHat" />
+                        <div class="card-body p-2">
+                            <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
+                            <small class="text-muted">@bh.TacGia</small>
+                        </div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -30,15 +34,17 @@
 
 @if (Model.CaSis.Any())
 {
-    <section class="section">
-        <h2>Ca sĩ</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Ca sĩ</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var cs in Model.CaSis)
             {
-                <a class="card" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
-                    <img src="~/images/casi/@cs.HinhAnh" alt="@cs.TenCaSi" />
-                    <span>@cs.TenCaSi</span>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
+                        <img src="~/images/casi/@cs.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cs.TenCaSi" />
+                        <div class="card-body p-2"><span class="fw-semibold small">@cs.TenCaSi</span></div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -46,15 +52,17 @@
 
 @if (Model.Albums.Any())
 {
-    <section class="section">
-        <h2>Album</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Album</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var ab in Model.Albums)
             {
-                <a class="card" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
-                    <img src="~/images/album/@ab.HinhAnh" alt="@ab.TenAlbum" />
-                    <span>@ab.TenAlbum</span>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
+                        <img src="~/images/album/@ab.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@ab.TenAlbum" />
+                        <div class="card-body p-2"><span class="fw-semibold small">@ab.TenAlbum</span></div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -62,15 +70,17 @@
 
 @if (Model.Playlists.Any())
 {
-    <section class="section">
-        <h2>Playlist</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Playlist</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var pl in Model.Playlists)
             {
-                <a class="card" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
-                    <img src="~/images/playlist/@pl.HinhAnh" alt="@pl.TenPlayList" />
-                    <span>@pl.TenPlayList</span>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
+                        <img src="~/images/playlist/@pl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@pl.TenPlayList" />
+                        <div class="card-body p-2"><span class="fw-semibold small">@pl.TenPlayList</span></div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -78,15 +88,17 @@
 
 @if (Model.TheLoais.Any())
 {
-    <section class="section">
-        <h2>Thể loại</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Thể loại</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var tl in Model.TheLoais)
             {
-                <a class="card" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
-                    <img src="~/images/theloai/@tl.HinhAnh" alt="@tl.TenTheLoai" />
-                    <span>@tl.TenTheLoai</span>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
+                        <img src="~/images/theloai/@tl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@tl.TenTheLoai" />
+                        <div class="card-body p-2"><span class="fw-semibold small">@tl.TenTheLoai</span></div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -94,15 +106,17 @@
 
 @if (Model.ChuDes.Any())
 {
-    <section class="section">
-        <h2>Chủ đề</h2>
-        <div class="card-grid">
+    <section class="mb-4">
+        <h2 class="h4 mb-3 border-start border-success ps-2">Chủ đề</h2>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var cd in Model.ChuDes)
             {
-                <a class="card" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
-                    <img src="~/images/chude/@cd.HinhAnh" alt="@cd.TenChuDe" />
-                    <span>@cd.TenChuDe</span>
-                </a>
+                <div class="col">
+                    <a class="card h-100 text-decoration-none text-body" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
+                        <img src="~/images/chude/@cd.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cd.TenChuDe" />
+                        <div class="card-body p-2"><span class="fw-semibold small">@cd.TenChuDe</span></div>
+                    </a>
+                </div>
             }
         </div>
     </section>
@@ -111,5 +125,5 @@
 @if (!Model.BaiHats.Any() && !Model.CaSis.Any() && !Model.Albums.Any()
    && !Model.Playlists.Any() && !Model.TheLoais.Any() && !Model.ChuDes.Any())
 {
-    <p class="muted">Không tìm thấy kết quả nào.</p>
+    <p class="text-muted">Không tìm thấy kết quả nào.</p>
 }
