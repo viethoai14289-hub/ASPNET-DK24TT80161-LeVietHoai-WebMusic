@@ -5,7 +5,7 @@
 
 <section class="mb-4">
     <h2 class="h4 mb-3 border-start border-success ps-2">Thể loại</h2>
-    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
         @foreach (var tl in Model.TheLoais)
         {
             <div class="col">
@@ -23,7 +23,7 @@
 {
     <section class="mb-4">
         <h2 class="h4 mb-3 border-start border-success ps-2">Playlist theo thể loại</h2>
-        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
             @foreach (var pl in Model.Playlists)
             {
                 <div class="col">

@@ -3,3 +3,63 @@ src/.claude/settings.local.json
 
 # VS Code workspace settings
 src/.vscode/settings.json
+
+## -- ASP.NET Core / .NET (microsoft gitignore) --
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.cache
+*.VC.db
+*.VC.opendb
+
+# Build outputs
+*.dll
+*.exe
+*.pdb
+*.mdf
+*.ldf
+*.ndf
+*.cache
+*.log
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Rider / JetBrains
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user

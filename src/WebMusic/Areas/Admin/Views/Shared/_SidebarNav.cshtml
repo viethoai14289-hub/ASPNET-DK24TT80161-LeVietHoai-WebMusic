@@ -1,0 +1,17 @@
+<div class="fw-bold fs-5 mb-3 border-bottom border-secondary pb-2">Giao diện ADMIN</div>
+<nav class="nav flex-column flex-grow-1 gap-1">
+    <a class="nav-link" asp-controller="Home" asp-action="Index">Trang quản trị</a>
+    <a class="nav-link" asp-controller="CaSi" asp-action="Index">Ca sĩ</a>
+    <a class="nav-link" asp-controller="TheLoai" asp-action="Index">Thể loại</a>
+    <a class="nav-link" asp-controller="ChuDe" asp-action="Index">Chủ đề</a>
+    <a class="nav-link" asp-controller="Playlist" asp-action="Index">Playlist</a>
+    <a class="nav-link" asp-controller="BaiHat" asp-action="Index">Bài hát</a>
+    <a class="nav-link" asp-controller="Album" asp-action="Index">Album</a>
+    <hr class="border-secondary" />
+    <a class="nav-link" asp-controller="CaSiBaiHat" asp-action="Index">Ca sĩ - Bài hát</a>
+    <a class="nav-link" asp-controller="CaSiAlbum" asp-action="Index">Ca sĩ - Album</a>
+    <a class="nav-link" asp-controller="PlaylistBaiHat" asp-action="Index">Playlist - Bài hát</a>
+    <hr class="border-secondary" />
+    <a class="nav-link" asp-controller="TaiKhoan" asp-action="Index">Tài khoản</a>
+</nav>
+<a class="btn btn-danger w-100 mt-3" asp-area="" asp-controller="Account" asp-action="Logout">Đăng xuất</a>

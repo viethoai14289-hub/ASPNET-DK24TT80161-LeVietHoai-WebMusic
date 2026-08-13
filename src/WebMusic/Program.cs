@@ -16,17 +16,22 @@ builder.Services.AddScoped<WebMusic.Services.IPlaylistService, WebMusic.Services
 builder.Services.AddScoped<WebMusic.Services.ISearchService, WebMusic.Services.SearchService>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddAntiforgery(o => o.HeaderName = "X-CSRF-TOKEN");
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o =>
     {
+        o.Cookie.Name = "WebMusic.Auth";
         o.LoginPath = "/Account/Login";
         o.LogoutPath = "/Account/Logout";
         o.AccessDeniedPath = "/Account/AccessDenied";
-        o.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        o.ReturnUrlParameter = "ReturnUrl";
+        o.ExpireTimeSpan = TimeSpan.FromHours(2);
         o.SlidingExpiration = true;
         o.Cookie.HttpOnly = true;
+        o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        o.Cookie.SameSite = SameSiteMode.Lax;
     });
 builder.Services.AddAuthorization();
 
@@ -36,6 +41,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+    app.UseHttpsRedirection();
 }
 
 app.UseStaticFiles();
@@ -44,11 +50,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
     name: "admin",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

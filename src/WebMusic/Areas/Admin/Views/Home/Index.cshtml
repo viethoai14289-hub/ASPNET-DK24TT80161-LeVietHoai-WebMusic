@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Trang quản trị";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Tổng quan hệ thống</h1>
+    <span class="text-muted">Xin chào, @User.Identity?.Name</span>
+</div>
+
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-4">
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.BaiHat</div>
+                <div class="text-muted">Bài hát</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="BaiHat" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.CaSi</div>
+                <div class="text-muted">Ca sĩ</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="CaSi" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.Album</div>
+                <div class="text-muted">Album</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="Album" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.Playlist</div>
+                <div class="text-muted">Playlist</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="Playlist" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.TheLoai</div>
+                <div class="text-muted">Thể loại</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="TheLoai" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.ChuDe</div>
+                <div class="text-muted">Chủ đề</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="ChuDe" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <div class="display-6 fw-bold text-success">@ViewBag.TaiKhoan</div>
+                <div class="text-muted">Tài khoản</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a asp-controller="TaiKhoan" asp-action="Index" class="text-decoration-none small">Quản lý →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="h5 mb-3">Liên kết nhanh</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-2">
+            <div class="col"><a asp-controller="CaSiBaiHat" asp-action="Index" class="text-decoration-none">→ Ca sĩ - Bài hát</a></div>
+            <div class="col"><a asp-controller="CaSiAlbum" asp-action="Index" class="text-decoration-none">→ Ca sĩ - Album</a></div>
+            <div class="col"><a asp-controller="PlaylistBaiHat" asp-action="Index" class="text-decoration-none">→ Playlist - Bài hát</a></div>
+        </div>
+    </div>
+</div>

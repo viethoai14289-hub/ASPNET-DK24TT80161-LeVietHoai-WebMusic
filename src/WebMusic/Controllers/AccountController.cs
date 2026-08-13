@@ -36,12 +36,18 @@ public class AccountController : Controller
 
         var claims = new List<Claim> { new(ClaimTypes.Name, tenDangNhap) };
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var props = new AuthenticationProperties
+        {
+            IsPersistent = true,
+            ExpiresUtc = DateTimeOffset.UtcNow.AddHours(2)
+        };
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
-            new ClaimsPrincipal(identity));
+            new ClaimsPrincipal(identity),
+            props);
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
-        return RedirectToAction("Index", "CaSi", new { area = "Admin" });
+        return RedirectToAction("Index", "Home", new { area = "Admin" });
     }
 
     [HttpGet]
