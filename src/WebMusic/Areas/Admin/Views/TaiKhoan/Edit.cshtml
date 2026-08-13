@@ -1,0 +1,11 @@
+@model TaiKhoan
+@{ ViewData["Title"] = "Sửa tài khoản"; }
+<h1>Sửa tài khoản</h1>
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <label>Tên đăng nhập <input asp-for="TenDangNhap" /></label>
+    <label>Mật khẩu mới (để trống nếu không đổi) <input type="password" name="newMatKhau" /></label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

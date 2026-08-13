@@ -1,0 +1,24 @@
+@model IEnumerable<PlaylistBaiHat>
+@{ ViewData["Title"] = "Playlist - Bài hát"; }
+<div class="admin-toolbar">
+    <h1>Playlist - Bài hát</h1>
+    <a class="btn-primary" asp-action="Create">+ Thêm liên kết</a>
+</div>
+<table class="admin-table">
+    <thead><tr><th>ID</th><th>Playlist</th><th>Bài hát</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Id</td><td>@x.MaPlayList</td><td>@x.MaBaiHat</td>
+                <td class="row-actions">
+                    <a asp-action="Edit" asp-route-id="@x.Id">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@x.Id" method="post" onsubmit="return confirm('Xóa?')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

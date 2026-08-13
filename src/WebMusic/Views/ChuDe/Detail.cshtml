@@ -1,0 +1,26 @@
+@model ChuDeDetailVM
+@{
+    ViewData["Title"] = Model.ChuDe?.TenChuDe;
+}
+
+<div class="detail-view">
+    <img class="detail-cover" src="~/images/chude/@Model.ChuDe?.HinhAnh" alt="@Model.ChuDe?.TenChuDe" />
+    <div class="detail-info">
+        <h1>@Model.ChuDe?.TenChuDe</h1>
+        <p class="desc">@Model.ChuDe?.MoTaThem</p>
+    </div>
+</div>
+
+<section class="section">
+    <h2>Bài hát</h2>
+    <div class="card-grid">
+        @foreach (var bh in Model.BaiHats)
+        {
+            <a class="card" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" />
+                <span>@bh.TenBaiHat</span>
+                <small>@bh.TacGia</small>
+            </a>
+        }
+    </div>
+</section>

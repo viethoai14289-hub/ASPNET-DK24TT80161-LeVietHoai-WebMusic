@@ -1,0 +1,30 @@
+@model IEnumerable<CaSi>
+@{
+    ViewData["Title"] = "Quản lý ca sĩ";
+}
+<div class="admin-toolbar">
+    <h1>Ca sĩ</h1>
+    <a class="btn-primary" asp-action="Create">+ Thêm ca sĩ</a>
+</div>
+<table class="admin-table">
+    <thead><tr><th>Mã</th><th>Ảnh</th><th>Tên</th><th>Năm sinh</th><th>Quê quán</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var cs in Model)
+        {
+            <tr>
+                <td>@cs.MaCaSi</td>
+                <td><img src="~/images/casi/@cs.HinhAnh" alt="" class="thumb" /></td>
+                <td>@cs.TenCaSi</td>
+                <td>@cs.NamSinh</td>
+                <td>@cs.QueQuan</td>
+                <td class="row-actions">
+                    <a asp-action="Edit" asp-route-id="@cs.MaCaSi">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@cs.MaCaSi" method="post" onsubmit="return confirm('Xóa ca sĩ này?')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

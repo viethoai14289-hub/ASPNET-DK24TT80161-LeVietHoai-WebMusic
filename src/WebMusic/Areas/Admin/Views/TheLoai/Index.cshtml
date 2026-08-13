@@ -1,0 +1,26 @@
+@model IEnumerable<TheLoai>
+@{ ViewData["Title"] = "Quản lý thể loại"; }
+<div class="admin-toolbar">
+    <h1>Thể loại</h1>
+    <a class="btn-primary" asp-action="Create">+ Thêm thể loại</a>
+</div>
+<table class="admin-table">
+    <thead><tr><th>Mã</th><th>Ảnh</th><th>Tên thể loại</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var tl in Model)
+        {
+            <tr>
+                <td>@tl.MaTheLoai</td>
+                <td><img src="~/images/theloai/@tl.HinhAnh" alt="" class="thumb" /></td>
+                <td>@tl.TenTheLoai</td>
+                <td class="row-actions">
+                    <a asp-action="Edit" asp-route-id="@tl.MaTheLoai">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@tl.MaTheLoai" method="post" onsubmit="return confirm('Xóa thể loại này?')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

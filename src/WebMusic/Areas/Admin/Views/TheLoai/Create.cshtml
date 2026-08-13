@@ -1,0 +1,10 @@
+@model TheLoai
+@{ ViewData["Title"] = "Thêm thể loại"; }
+<h1>Thêm thể loại</h1>
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên thể loại <input asp-for="TenTheLoai" /></label>
+    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

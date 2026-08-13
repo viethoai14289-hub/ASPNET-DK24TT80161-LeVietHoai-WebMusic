@@ -1,0 +1,23 @@
+@model CaSiAlbum
+@{
+    ViewData["Title"] = "Sửa Ca sĩ - Album";
+    var cs = ViewBag.CaSis as List<CaSi> ?? new();
+    var ab = ViewBag.Albums as List<Album> ?? new();
+}
+<h1>Sửa Ca sĩ - Album</h1>
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <label>Ca sĩ
+        <select asp-for="MaCaSi">
+            @foreach (var c in cs) { <option value="@c.MaCaSi" selected="@(c.MaCaSi == Model.MaCaSi)">@c.TenCaSi</option> }
+        </select>
+    </label>
+    <label>Album
+        <select asp-for="MaAlbum">
+            @foreach (var a in ab) { <option value="@a.MaAlbum" selected="@(a.MaAlbum == Model.MaAlbum)">@a.TenAlbum</option> }
+        </select>
+    </label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

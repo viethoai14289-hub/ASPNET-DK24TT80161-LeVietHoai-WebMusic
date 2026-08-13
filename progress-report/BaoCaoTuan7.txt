@@ -1,0 +1,33 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 7
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 12/08/2026 - 18/08/2026
+**Giai đoạn:** Tinh chỉnh chức năng & Bắt đầu viết lại báo cáo
+
+## 1. MỤC TIÊU TUẦN
+
+* Rà soát lại các chức năng đã xây dựng, tinh chỉnh mã nguồn cho gọn ổn.
+* Bắt đầu viết lại báo cáo đồ án theo tiến độ thực tế.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Rà soát chức năng CRUD của khu quản trị, chỉnh lại luồng thêm/sửa/xóa cho nhất quán.
+* Kiểm tra lại chức năng phát nhạc và hiển thị lời bài hát trên trang chi tiết.
+* Chuẩn bị dàn ý mới cho báo cáo đồ án, sắp xếp lại các mục nội dung.
+
+## 3. KẾT QUẢ
+
+* Các chức năng quản trị hoạt động ổn định, ít phát sinh lỗi.
+* Dàn ý báo cáo mới đã được thống nhất trong nhóm.
+
+## 4. ĐÁNH GIÁ CHUNG
+
+* **Ưu điểm:** Quá trình tinh chỉnh giúp mã nguồn gọn hơn, dễ bảo trì.
+* **Khó khăn:** Cần thêm thời gian để hoàn thiện nội dung báo cáo.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Rà soát chức năng quản trị, viết lại dàn ý báo cáo.
+* **Lê Thị Nhàn:** Kiểm thử lại chức năng phát nhạc.
+* **Đỗ Xuân Thủy:** Chuẩn bị nội dung cho các mục báo cáo.

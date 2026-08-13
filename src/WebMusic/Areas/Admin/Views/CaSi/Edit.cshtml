@@ -1,0 +1,16 @@
+@model CaSi
+@{ ViewData["Title"] = "Sửa ca sĩ"; }
+<h1>Sửa ca sĩ</h1>
+@if (!string.IsNullOrEmpty(Model.HinhAnh))
+{ <img src="~/images/casi/@Model.HinhAnh" alt="" class="thumb" /> }
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="MaCaSi" />
+    <label>Tên ca sĩ <input asp-for="TenCaSi" /></label>
+    <label>Năm sinh <input asp-for="NamSinh" type="number" /></label>
+    <label>Quê quán <input asp-for="QueQuan" /></label>
+    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
+    <label>Mô tả thêm <textarea asp-for="MoTaThem" rows="4"></textarea></label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

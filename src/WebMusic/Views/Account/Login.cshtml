@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Đăng nhập";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<div class="auth-form">
+    <h1>Đăng nhập</h1>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert-error">
+            @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            { <p>@e.ErrorMessage</p> }
+        </div>
+    }
+
+    <form method="post" asp-action="Login" asp-route-returnUrl="@returnUrl">
+        @Html.AntiForgeryToken()
+        <label>Tên đăng nhập
+            <input type="text" name="tenDangNhap" required autocomplete="username" />
+        </label>
+        <label>Mật khẩu
+            <input type="password" name="matKhau" required autocomplete="current-password" />
+        </label>
+        <button type="submit" class="btn-primary">Đăng nhập</button>
+    </form>
+    <p>Chưa có tài khoản? <a asp-action="Register">Đăng ký</a></p>
+</div>

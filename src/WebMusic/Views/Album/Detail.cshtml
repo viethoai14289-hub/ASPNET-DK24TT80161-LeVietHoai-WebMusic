@@ -1,0 +1,26 @@
+@model Album
+@{
+    ViewData["Title"] = Model.TenAlbum;
+    var baiHats = ViewBag.BaiHats as List<BaiHat> ?? new();
+}
+
+<div class="detail-view">
+    <img class="detail-cover" src="~/images/album/@Model.HinhAnh" alt="@Model.TenAlbum" />
+    <div class="detail-info">
+        <h1>@Model.TenAlbum</h1>
+    </div>
+</div>
+
+<section class="section">
+    <h2>Bài hát trong album</h2>
+    <div class="card-grid">
+        @foreach (var bh in baiHats)
+        {
+            <a class="card" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" />
+                <span>@bh.TenBaiHat</span>
+                <small>@bh.TacGia</small>
+            </a>
+        }
+    </div>
+</section>

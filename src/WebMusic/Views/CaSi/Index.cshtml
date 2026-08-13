@@ -1,0 +1,17 @@
+@model IEnumerable<CaSi>
+@{
+    ViewData["Title"] = "Ca sĩ";
+}
+
+<section class="section">
+    <h2>Ca sĩ</h2>
+    <div class="card-grid">
+        @foreach (var cs in Model)
+        {
+            <a class="card" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
+                <img src="~/images/casi/@cs.HinhAnh" alt="@cs.TenCaSi" />
+                <span>@cs.TenCaSi</span>
+            </a>
+        }
+    </div>
+</section>

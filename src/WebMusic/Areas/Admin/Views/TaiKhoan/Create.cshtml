@@ -1,0 +1,10 @@
+@model TaiKhoan
+@{ ViewData["Title"] = "Thêm tài khoản"; }
+<h1>Thêm tài khoản</h1>
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên đăng nhập <input asp-for="TenDangNhap" /></label>
+    <label>Mật khẩu <input type="password" name="matkhau" required /></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

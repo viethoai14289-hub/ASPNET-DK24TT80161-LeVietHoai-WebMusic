@@ -1,0 +1,11 @@
+@model ChuDe
+@{ ViewData["Title"] = "Thêm chủ đề"; }
+<h1>Thêm chủ đề</h1>
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên chủ đề <input asp-for="TenChuDe" /></label>
+    <label>Mô tả thêm <textarea asp-for="MoTaThem" rows="3"></textarea></label>
+    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

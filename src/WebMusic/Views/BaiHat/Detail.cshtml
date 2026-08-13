@@ -1,0 +1,25 @@
+@model BaiHat
+@{
+    ViewData["Title"] = Model.TenBaiHat;
+}
+
+<div class="detail-view">
+    <img class="detail-cover" src="~/images/baihat/@Model.HinhAnh" alt="@Model.TenBaiHat" />
+    <div class="detail-info">
+        <h1>@Model.TenBaiHat</h1>
+        <p class="meta">Tác giả: @Model.TacGia</p>
+
+        @if (!string.IsNullOrEmpty(Model.LinkBaiHat))
+        {
+            <audio controls preload="auto" class="player">
+                <source src="~/audio/@Model.LinkBaiHat" type="audio/mpeg" />
+                Trình duyệt không hỗ trợ phát nhạc.
+            </audio>
+        }
+
+        <div class="lyrics">
+            <h3>Lời bài hát</h3>
+            <pre>@Model.LoiBaiHat</pre>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+@model Album
+@{ ViewData["Title"] = "Thêm album"; }
+<h1>Thêm album</h1>
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên album <input asp-for="TenAlbum" /></label>
+    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

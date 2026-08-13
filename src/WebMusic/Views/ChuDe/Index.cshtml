@@ -1,0 +1,17 @@
+@model IEnumerable<ChuDe>
+@{
+    ViewData["Title"] = "Chủ đề";
+}
+
+<section class="section">
+    <h2>Chủ đề</h2>
+    <div class="card-grid">
+        @foreach (var cd in Model)
+        {
+            <a class="card" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
+                <img src="~/images/chude/@cd.HinhAnh" alt="@cd.TenChuDe" />
+                <span>@cd.TenChuDe</span>
+            </a>
+        }
+    </div>
+</section>

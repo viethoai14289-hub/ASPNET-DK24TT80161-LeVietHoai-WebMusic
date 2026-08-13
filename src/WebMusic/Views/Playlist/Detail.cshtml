@@ -1,0 +1,27 @@
+@model Playlist
+@{
+    ViewData["Title"] = Model.TenPlayList;
+    var baiHats = ViewBag.BaiHats as List<BaiHat> ?? new();
+}
+
+<div class="detail-view">
+    <img class="detail-cover" src="~/images/playlist/@Model.HinhAnh" alt="@Model.TenPlayList" />
+    <div class="detail-info">
+        <h1>@Model.TenPlayList</h1>
+        <p class="meta">Người tạo: @Model.NguoiTao</p>
+    </div>
+</div>
+
+<section class="section">
+    <h2>Bài hát trong playlist</h2>
+    <div class="card-grid">
+        @foreach (var bh in baiHats)
+        {
+            <a class="card" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" />
+                <span>@bh.TenBaiHat</span>
+                <small>@bh.TacGia</small>
+            </a>
+        }
+    </div>
+</section>

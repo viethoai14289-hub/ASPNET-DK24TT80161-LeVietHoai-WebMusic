@@ -1,0 +1,13 @@
+@model TheLoai
+@{ ViewData["Title"] = "Sửa thể loại"; }
+<h1>Sửa thể loại</h1>
+@if (!string.IsNullOrEmpty(Model.HinhAnh))
+{ <img src="~/images/theloai/@Model.HinhAnh" alt="" class="thumb" /> }
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="MaTheLoai" />
+    <label>Tên thể loại <input asp-for="TenTheLoai" /></label>
+    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

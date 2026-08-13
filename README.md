@@ -2,7 +2,7 @@
 
 ## Đề tài: Xây dựng Website nghe nhạc trực tuyến (ASP.NET)
 
-Đồ án chuyên đề ASP.NET xây dựng website nghe nhạc trực tuyến với đầy đủ chức năng dành cho người dùng và quản trị viên, được phát triển bằng **C# / ASP.NET Web Forms** kết nối với **Microsoft SQL Server**.
+Đồ án chuyên đề ASP.NET xây dựng website nghe nhạc trực tuyến với đầy đủ chức năng dành cho người dùng và quản trị viên, được phát triển bằng **C# / ASP.NET Core 8 MVC** kết nối **Microsoft SQL Server** qua **ADO.NET**.
 
 ---
 
@@ -32,55 +32,70 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 ### Công nghệ sử dụng
 
 * **Ngôn ngữ lập trình:** C#
-* **Nền tảng:** ASP.NET Web Forms (.NET Framework)
+* **Nền tảng:** ASP.NET Core 8 MVC
 * **Cơ sở dữ liệu:** Microsoft SQL Server
-* **Truy xuất dữ liệu:** ADO.NET
-* **Giao diện:** HTML5, CSS3, Bootstrap, JavaScript, jQuery
-* **Kiến trúc:** Model – View – Controller (MVC)
+* **Truy xuất dữ liệu:** ADO.NET (`Microsoft.Data.SqlClient`)
+* **Giao diện:** HTML5, CSS3, JavaScript thuần (không Bootstrap, không jQuery)
+* **Xác thực:** Custom cookie authentication + BCrypt hash mật khẩu
 * **Quy trình phát triển:** Waterfall
-* **Công cụ phát triển:** Visual Studio 2019, SQL Server Management Studio (SSMS), Git, GitHub
+* **Công cụ phát triển:** Visual Studio, SQL Server Management Studio (SSMS), Git, GitHub
 
 ---
 
 # 2. Chức năng chính
 
-## Người dùng
+## Người dùng (Frontend)
 
-* Xem trang chủ với danh sách bài hát, ca sĩ và album nổi bật.
-* Nghe nhạc trực tuyến.
-* Xem lời bài hát.
-* Xem danh sách và thông tin chi tiết của:
-
+* Xem trang chủ với slideshow và 4 danh sách: thể loại, chủ đề, album, bài hát.
+* Nghe nhạc trực tuyến bằng `<audio>` native, xem lời bài hát.
+* Xem danh sách và trang chi tiết của:
   * Bài hát
-  * Ca sĩ
+  * Ca sĩ (gộp bài hát + album của ca sĩ qua join)
   * Album
   * Chủ đề
   * Thể loại
-* Nghe nhạc theo Playlist.
-* Tìm kiếm bài hát theo từ khóa.
-
-## Quản trị viên
-
-* Đăng nhập và đăng ký tài khoản quản trị.
-* Quản lý (Thêm, Sửa, Xóa):
-
-  * Bài hát
-  * Ca sĩ
-  * Album
-  * Thể loại
-  * Chủ đề
   * Playlist
-  * Tài khoản
-* Quản lý quan hệ:
+* Lọc danh sách theo thể loại.
+* Nghe nhạc theo Playlist.
+* Tìm kiếm theo 1 từ khóa (`q`), tìm trên 6 thực thể, chỉ hiển thị mục có kết quả.
+* Đăng nhập / Đăng ký tài khoản (cookie auth, BCrypt, validate phía server).
 
-  * Ca sĩ – Bài hát
-  * Ca sĩ – Album
-  * Playlist – Bài hát
-* Tải lên hình ảnh và tệp nhạc (.mp3).
+## Quản trị viên (Admin, area `/Admin`)
+
+* Toàn bộ area đặt `[Authorize]` — chưa đăng nhập chuyển về trang đăng nhập.
+* Đăng nhập và đăng ký tài khoản quản trị.
+* Quản lý (Thêm / Sửa / Xóa) đầy đủ cho **10 thực thể**:
+  * Bài hát, Ca sĩ, Album, Thể loại, Chủ đề, Playlist
+  * 3 bảng junction: Ca sĩ – Bài hát, Ca sĩ – Album, Playlist – Bài hát
+  * Tài khoản
+* Tải lên hình ảnh qua `IFormFile` vào `wwwroot/images/<entity>/`.
+* Antiforgery token trên mọi form POST, hộp thoại xác nhận khi xóa.
 
 ---
 
-# 3. Cấu trúc thư mục
+# 3. Kiến trúc
+
+```
+Controller (routing/HTTP) → Service (business logic) → ADO.NET (SqlDataReader) → SQL Server
+```
+
+Mỗi service là một lớp injected qua DI, dùng `SqlConnection` + `SqlCommand` parameter hóa. Connection string duy nhất đọc từ `appsettings.json`, mỗi method mở connection trong `using` (không leak).
+
+### Stack
+
+| Thành phần        | Công nghệ                                  |
+| ----------------- | ------------------------------------------ |
+| Framework         | ASP.NET Core 8 MVC                         |
+| Data access       | ADO.NET (`Microsoft.Data.SqlClient`)       |
+| DB                | SQL Server                                 |
+| Auth              | Custom cookie authentication               |
+| Hash mật khẩu     | BCrypt.Net-Next                            |
+| Views             | Razor + Tag Helpers                        |
+| CSS/JS            | CSS thuần, JS thuần (không Bootstrap/jQuery) |
+
+---
+
+# 4. Cấu trúc thư mục
 
 ```text
 webmusicASP/
@@ -93,35 +108,39 @@ webmusicASP/
 │   └── BaoCaoTuan6.txt
 │
 ├── setup/
-│   └── csdl.sql          # Script tạo cơ sở dữ liệu
+│   └── csdl.sql          # Script tạo cơ sở dữ liệu (bản ASP.NET Core 8)
 │
 ├── src/
-│   ├── Nhom.sln
-│   ├── Nhom/
-│   │   ├── Models/
-│   │   ├── Controllers/
-│   │   ├── Views/
-│   │   ├── audio/
-│   │   ├── images/
-│   │   ├── css/
-│   │   └── js/
-│   └── packages/
+│   └── WebMusic/         # Mã nguồn ASP.NET Core 8 MVC
+│       ├── Areas/Admin/  # Khu quản trị (10 controller + views CRUD, [Authorize])
+│       ├── Controllers/  # Khu người dùng (9 controller)
+│       ├── Data/         # Db.cs (connection helper)
+│       ├── Models/       # 10 entity (POCO)
+│       ├── Services/     # 8 service + interface (ADO.NET)
+│       ├── ViewModels/   # DTO cho view phức tạp
+│       ├── Views/        # Razor views (FE) + _Layout dark responsive
+│       ├── wwwroot/
+│       │   ├── css/site.css
+│       │   ├── js/site.js
+│       │   ├── images/
+│       │   └── audio/
+│       ├── Program.cs
+│       └── appsettings.json
 │
 └── thesis/
-    └── BaoCao-WebsiteNgheNhacTrucTuyen-DK24TT80161.pdf
+    └── ASPNET-DK24TT80161-LeVietHoai-WebMusic.pdf
 ```
 
 ---
 
-# 4. Hướng dẫn cài đặt
+# 5. Hướng dẫn cài đặt
 
 ## Yêu cầu
 
-* Visual Studio 2019 trở lên
-* ASP.NET & Web Development Workload
-* Microsoft SQL Server (Express hoặc Standard)
+* [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+* Visual Studio 2022 hoặc VS Code
+* Microsoft SQL Server (LocalDB hoặc instance bất kỳ)
 * SQL Server Management Studio (SSMS)
-* .NET Framework
 
 ## Các bước cài đặt
 
@@ -134,59 +153,53 @@ cd webmusicASP
 
 ### Bước 2. Tạo cơ sở dữ liệu
 
-* Mở **SQL Server Management Studio (SSMS)**.
-* Mở file:
+Chạy script tạo database + seed dữ liệu mẫu:
 
-```text
-setup/csdl.sql
+```bash
+sqlcmd -S . -i setup/csdl.sql
 ```
 
-* Chọn **Execute** để tạo cơ sở dữ liệu **Nhaccuatui** cùng dữ liệu mẫu.
+Script `csdl.sql` tự động:
+
+* Drop + tạo lại DB `Nhaccuatui`.
+* Tạo 10 bảng + khóa ngoại (junction có `ON DELETE CASCADE`).
+* Seed dữ liệu mẫu (bài hát, ca sĩ, album, chủ đề, thể loại, playlist, các junction, 2 tài khoản đã hash BCrypt).
 
 ### Bước 3. Cấu hình chuỗi kết nối
 
-Mở project bằng Visual Studio.
+Sửa `src/WebMusic/appsettings.json` cho đúng SQL Server của bạn:
 
-Trong file:
-
-```text
-Web.config
+```json
+"ConnectionStrings": {
+  "MusicDb": "Server=.;Database=Nhaccuatui;Trusted_Connection=True;TrustServerCertificate=True;"
+}
 ```
-
-chỉnh lại chuỗi kết nối:
-
-```xml
-NhaccuatuiConnectionString
-```
-
-cho phù hợp với tên SQL Server trên máy.
-
-> **Lưu ý:** Một số Controller sử dụng chuỗi kết nối viết trực tiếp trong mã nguồn, vì vậy cần chỉnh lại `Data Source` tương ứng.
 
 ### Bước 4. Chạy chương trình
 
-* Build Solution.
-* Nhấn **F5** hoặc **Ctrl + F5** để chạy trên IIS Express.
-
----
-
-# 5. Tài khoản thử nghiệm
-
-| Vai trò       | Tài khoản | Mật khẩu   |
-| ------------- | --------- | ---------- |
-| Quản trị viên | **admin** | **123456** |
-
-Tài khoản trên đã được tạo sẵn trong file:
-
-```text
-setup/csdl.sql
+```bash
+cd src/WebMusic
+dotnet restore
+dotnet build
+dotnet run
 ```
 
-Có thể tạo thêm tài khoản mới thông qua chức năng **Đăng ký** của trang quản trị.
+Mở http://localhost:5258
 
 ---
 
-# 6. Báo cáo tiến độ
+# 6. Tài khoản thử nghiệm
+
+| Vai trò       | Tài khoản | Mật khẩu  | Ghi chú              |
+| ------------- | --------- | --------- | -------------------- |
+| Quản trị viên | `admin`   | `123`     | hash BCrypt trong seed |
+| Người dùng    | `huyen`   | `123456`  | hash BCrypt trong seed |
+
+Tài khoản trên đã được tạo sẵn trong `setup/csdl.sql`. Có thể tạo thêm tài khoản mới thông qua chức năng **Đăng ký**.
+
+---
+
+# 7. Báo cáo tiến độ
 
 Các báo cáo tiến độ được lưu trong thư mục:
 
@@ -194,31 +207,34 @@ Các báo cáo tiến độ được lưu trong thư mục:
 progress-report/
 ```
 
-| Tuần   | Thời gian               | Nội dung                                                |
-| ------ | ----------------------- | ------------------------------------------------------- |
-| Tuần 1 | 01/06/2026 – 07/06/2026 | Khảo sát và phân tích yêu cầu                           |
-| Tuần 2 | 08/06/2026 – 14/06/2026 | Thiết kế cơ sở dữ liệu và ERD                           |
-| Tuần 3 | 15/06/2026 – 21/06/2026 | Xây dựng Models và Controllers                          |
-| Tuần 4 | 22/06/2026 – 28/06/2026 | Xây dựng chức năng quản trị (Back-end)                  |
-| Tuần 5 | 29/06/2026 – 05/07/2026 | Xây dựng giao diện người dùng và chức năng phát nhạc    |
-| Tuần 6 | 06/07/2026 – 09/07/2026 | Tìm kiếm, kiểm thử, hoàn thiện hệ thống và viết báo cáo |
+| Tuần    | Thời gian               | Nội dung                                                |
+| ------- | ----------------------- | ------------------------------------------------------- |
+| Tuần 1  | 01/06/2026 – 07/06/2026 | Khảo sát và phân tích yêu cầu                           |
+| Tuần 2  | 08/06/2026 – 14/06/2026 | Thiết kế cơ sở dữ liệu và ERD                           |
+| Tuần 3  | 15/06/2026 – 21/06/2026 | Xây dựng Models và Controllers                          |
+| Tuần 4  | 22/06/2026 – 28/06/2026 | Xây dựng chức năng quản trị (Back-end)                  |
+| Tuần 5  | 29/06/2026 – 05/07/2026 | Xây dựng giao diện người dùng và chức năng phát nhạc    |
+| Tuần 6  | 06/07/2026 – 12/07/2026 | Tìm kiếm, kiểm thử, hoàn thiện hệ thống và viết báo cáo |
+| Tuần 7  | 12/08/2026 – 18/08/2026 | Tinh chỉnh chức năng, bắt đầu viết lại báo cáo          |
+| Tuần 8  | 19/08/2026 – 25/08/2026 | Hoàn thiện, kiểm thử và bàn giao đồ án                  |
 
 ---
 
-# 7. Kết quả đạt được
+# 8. Kết quả đạt được
 
 Sau quá trình thực hiện, nhóm đã hoàn thành các nội dung sau:
 
 * Thiết kế và xây dựng cơ sở dữ liệu trên Microsoft SQL Server.
-* Xây dựng đầy đủ chức năng quản trị (CRUD).
-* Hoàn thiện giao diện người dùng.
+* Xây dựng đầy đủ chức năng quản trị (CRUD) cho 10 thực thể.
+* Hoàn thiện giao diện người dùng (dark theme, responsive).
 * Tích hợp chức năng phát nhạc trực tuyến bằng HTML5 Audio.
-* Hỗ trợ tìm kiếm bài hát.
+* Hỗ trợ tìm kiếm trên 6 thực thể với 1 từ khóa.
+* Xác thực cookie + mã hóa mật khẩu BCrypt.
 * Hoàn thiện báo cáo đồ án và tài liệu hướng dẫn cài đặt.
 
 ---
 
-# 8. Hướng phát triển
+# 9. Hướng phát triển
 
 Trong tương lai, hệ thống có thể được mở rộng với các chức năng:
 
@@ -229,7 +245,6 @@ Trong tương lai, hệ thống có thể được mở rộng với các chức
 * Gợi ý nhạc theo sở thích.
 * Chia sẻ Playlist.
 * Phát nhạc nền liên tục.
-* Giao diện Responsive hoàn chỉnh cho thiết bị di động.
 
 ---
 

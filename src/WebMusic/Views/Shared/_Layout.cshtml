@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebMusic</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" alt="WebMusic" />
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a asp-controller="BaiHat" asp-action="Index">Bài hát</a></li>
+                    <li><a asp-controller="ChuDe" asp-action="Index">Chủ đề</a></li>
+                    <li><a asp-controller="TheLoai" asp-action="Index">Thể loại</a></li>
+                    <li><a asp-controller="CaSi" asp-action="Index">Ca sĩ</a></li>
+                    <li><a asp-controller="Playlist" asp-action="Index">Playlist</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <span>Xin chào, @User.Identity.Name</span>
+                    <a asp-controller="Account" asp-action="Logout">Đăng xuất</a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login">Đăng nhập</a>
+                    <a asp-controller="Account" asp-action="Register">Đăng ký</a>
+                }
+            </div>
+            <form class="search-box" asp-controller="Search" asp-action="Index" method="get">
+                <input type="search" name="q" placeholder="Tìm bài hát, ca sĩ, album..." aria-label="Tìm kiếm" />
+                <button type="submit">Tìm</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h4>Hỗ trợ</h4>
+                <p>FAQ, hướng dẫn, liên hệ chăm sóc khách hàng.</p>
+            </div>
+            <div>
+                <h4>Sản phẩm khác</h4>
+                <p>Ứng dụng mobile, WebMusic Plus, WebMusic Premium.</p>
+            </div>
+            <div>
+                <h4>Kết nối</h4>
+                <p>Facebook &nbsp; Instagram</p>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>WebMusic — dự án học nhóm ASP.NET Core MVC.</p>
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

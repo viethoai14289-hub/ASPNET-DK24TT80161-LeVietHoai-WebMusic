@@ -1,0 +1,39 @@
+@model BaiHat
+@{
+    ViewData["Title"] = "Sửa bài hát";
+    var tls = ViewBag.TheLoais as List<TheLoai> ?? new();
+    var abs = ViewBag.Albums as List<Album> ?? new();
+    var cds = ViewBag.ChuDes as List<ChuDe> ?? new();
+}
+
+<h1>Sửa bài hát</h1>
+@if (!string.IsNullOrEmpty(Model.HinhAnh))
+{
+    <img src="~/images/baihat/@Model.HinhAnh" alt="" class="thumb" />
+}
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="MaBaiHat" />
+    <label>Tên bài hát <input asp-for="TenBaiHat" /></label>
+    <label>Tác giả <input asp-for="TacGia" /></label>
+    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
+    <label>Link bài hát (tên file mp3) <input asp-for="LinkBaiHat" /></label>
+    <label>Thể loại
+        <select asp-for="MaTheLoai">
+            @foreach (var t in tls) { <option value="@t.MaTheLoai" selected="@(t.MaTheLoai == Model.MaTheLoai)">@t.TenTheLoai</option> }
+        </select>
+    </label>
+    <label>Album
+        <select asp-for="MaAlbum">
+            @foreach (var a in abs) { <option value="@a.MaAlbum" selected="@(a.MaAlbum == Model.MaAlbum)">@a.TenAlbum</option> }
+        </select>
+    </label>
+    <label>Chủ đề
+        <select asp-for="MaChuDe">
+            @foreach (var c in cds) { <option value="@c.MaChuDe" selected="@(c.MaChuDe == Model.MaChuDe)">@c.TenChuDe</option> }
+        </select>
+    </label>
+    <label>Lời bài hát <textarea asp-for="LoiBaiHat" rows="5"></textarea></label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

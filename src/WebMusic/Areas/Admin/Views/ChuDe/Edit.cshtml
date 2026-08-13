@@ -1,0 +1,14 @@
+@model ChuDe
+@{ ViewData["Title"] = "Sửa chủ đề"; }
+<h1>Sửa chủ đề</h1>
+@if (!string.IsNullOrEmpty(Model.HinhAnh))
+{ <img src="~/images/chude/@Model.HinhAnh" alt="" class="thumb" /> }
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="MaChuDe" />
+    <label>Tên chủ đề <input asp-for="TenChuDe" /></label>
+    <label>Mô tả thêm <textarea asp-for="MoTaThem" rows="3"></textarea></label>
+    <label>Ảnh mới (để trống nếu giữ nguyên) <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

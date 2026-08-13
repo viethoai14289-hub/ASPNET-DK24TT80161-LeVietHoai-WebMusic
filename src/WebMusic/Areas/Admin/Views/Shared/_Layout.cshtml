@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin WebMusic</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <div class="admin-header-inner">
+            <span class="admin-title">Giao diện ADMIN</span>
+            <nav class="admin-nav">
+                <a asp-controller="CaSi" asp-action="Index">Ca sĩ</a>
+                <a asp-controller="TheLoai" asp-action="Index">Thể loại</a>
+                <a asp-controller="ChuDe" asp-action="Index">Chủ đề</a>
+                <a asp-controller="Playlist" asp-action="Index">Playlist</a>
+                <a asp-controller="BaiHat" asp-action="Index">Bài hát</a>
+                <a asp-controller="Album" asp-action="Index">Album</a>
+                <a asp-controller="CaSiBaiHat" asp-action="Index">Ca sĩ-Bài hát</a>
+                <a asp-controller="CaSiAlbum" asp-action="Index">Ca sĩ-Album</a>
+                <a asp-controller="PlaylistBaiHat" asp-action="Index">Playlist-Bài hát</a>
+                <a asp-controller="TaiKhoan" asp-action="Index">Tài khoản</a>
+            </nav>
+            <a class="admin-logout" asp-controller="Account" asp-action="Logout">Đăng xuất</a>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        @RenderBody()
+    </main>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

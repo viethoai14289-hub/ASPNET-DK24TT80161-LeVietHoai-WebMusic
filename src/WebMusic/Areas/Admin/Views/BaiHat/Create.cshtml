@@ -1,0 +1,34 @@
+@model BaiHat
+@{
+    ViewData["Title"] = "Thêm bài hát";
+    var tls = ViewBag.TheLoais as List<TheLoai> ?? new();
+    var abs = ViewBag.Albums as List<Album> ?? new();
+    var cds = ViewBag.ChuDes as List<ChuDe> ?? new();
+}
+
+<h1>Thêm bài hát</h1>
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên bài hát <input asp-for="TenBaiHat" /></label>
+    <label>Tác giả <input asp-for="TacGia" /></label>
+    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
+    <label>Link bài hát (tên file mp3) <input asp-for="LinkBaiHat" placeholder="vd: Co-Em-Cho-MIN-Mr-A.mp3" /></label>
+    <label>Thể loại
+        <select asp-for="MaTheLoai">
+            @foreach (var t in tls) { <option value="@t.MaTheLoai">@t.TenTheLoai</option> }
+        </select>
+    </label>
+    <label>Album
+        <select asp-for="MaAlbum">
+            @foreach (var a in abs) { <option value="@a.MaAlbum">@a.TenAlbum</option> }
+        </select>
+    </label>
+    <label>Chủ đề
+        <select asp-for="MaChuDe">
+            @foreach (var c in cds) { <option value="@c.MaChuDe">@c.TenChuDe</option> }
+        </select>
+    </label>
+    <label>Lời bài hát <textarea asp-for="LoiBaiHat" rows="5"></textarea></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

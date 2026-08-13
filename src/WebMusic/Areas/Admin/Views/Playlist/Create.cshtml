@@ -1,0 +1,19 @@
+@model Playlist
+@{
+    ViewData["Title"] = "Thêm playlist";
+    var tls = ViewBag.TheLoais as List<TheLoai> ?? new();
+}
+<h1>Thêm playlist</h1>
+<form method="post" enctype="multipart/form-data" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Tên playlist <input asp-for="TenPlayList" /></label>
+    <label>Người tạo <input asp-for="NguoiTao" /></label>
+    <label>Thể loại
+        <select asp-for="MaTheLoai">
+            @foreach (var t in tls) { <option value="@t.MaTheLoai">@t.TenTheLoai</option> }
+        </select>
+    </label>
+    <label>Ảnh <input type="file" name="anh" accept="image/*" /></label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

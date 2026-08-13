@@ -1,0 +1,28 @@
+@model IEnumerable<Playlist>
+@{ ViewData["Title"] = "Quản lý playlist"; }
+<div class="admin-toolbar">
+    <h1>Playlist</h1>
+    <a class="btn-primary" asp-action="Create">+ Thêm playlist</a>
+</div>
+<table class="admin-table">
+    <thead><tr><th>Mã</th><th>Ảnh</th><th>Tên playlist</th><th>Người tạo</th><th>Thể loại</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var pl in Model)
+        {
+            <tr>
+                <td>@pl.MaPlayList</td>
+                <td><img src="~/images/playlist/@pl.HinhAnh" alt="" class="thumb" /></td>
+                <td>@pl.TenPlayList</td>
+                <td>@pl.NguoiTao</td>
+                <td>@pl.MaTheLoai</td>
+                <td class="row-actions">
+                    <a asp-action="Edit" asp-route-id="@pl.MaPlayList">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@pl.MaPlayList" method="post" onsubmit="return confirm('Xóa playlist này?')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

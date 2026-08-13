@@ -1,0 +1,23 @@
+@model PlaylistBaiHat
+@{
+    ViewData["Title"] = "Sửa Playlist - Bài hát";
+    var pl = ViewBag.Playlists as List<Playlist> ?? new();
+    var bh = ViewBag.BaiHats as List<BaiHat> ?? new();
+}
+<h1>Sửa Playlist - Bài hát</h1>
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <label>Playlist
+        <select asp-for="MaPlayList">
+            @foreach (var p in pl) { <option value="@p.MaPlayList" selected="@(p.MaPlayList == Model.MaPlayList)">@p.TenPlayList</option> }
+        </select>
+    </label>
+    <label>Bài hát
+        <select asp-for="MaBaiHat">
+            @foreach (var b in bh) { <option value="@b.MaBaiHat" selected="@(b.MaBaiHat == Model.MaBaiHat)">@b.TenBaiHat</option> }
+        </select>
+    </label>
+    <button type="submit" class="btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

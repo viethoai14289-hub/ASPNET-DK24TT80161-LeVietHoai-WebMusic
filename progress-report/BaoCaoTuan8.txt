@@ -1,0 +1,38 @@
+# BÁO CÁO TIẾN ĐỘ - TUẦN 8 (TUẦN CUỐI)
+
+**Đề tài:** Xây dựng Website nghe nhạc trực tuyến
+**Lớp:** DK24TT80161 | **GVHD:** TS. Đoàn Phước Miên
+**Thời gian:** 19/08/2026 - 25/08/2026
+**Giai đoạn:** Hoàn thiện, kiểm thử & Bàn giao đồ án
+
+## 1. MỤC TIÊU TUẦN
+
+* Hoàn thiện lần cuối các chức năng và giao diện.
+* Kiểm thử toàn hệ thống, khắc phục lỗi còn sót.
+* Hoàn thiện báo cáo đồ án và chuẩn bị bàn giao.
+
+## 2. CÔNG VIỆC ĐÃ LÀM
+
+* Rà soát lần cuối giao diện và các chức năng, sửa các chi tiết nhỏ.
+* Kiểm thử đăng nhập/đăng ký, thêm/sửa/xóa, phát nhạc trên nhiều trình duyệt.
+* Khắc phục các lỗi phát sinh trong quá trình kiểm thử.
+* Hoàn thiện nội dung báo cáo đồ án và tài liệu hướng dẫn cài đặt (README).
+* Chuẩn bị script cơ sở dữ liệu (setup/csdl.sql) và các báo cáo tiến độ.
+
+## 3. KẾT QUẢ
+
+* Hệ thống hoàn thiện, các chức năng cốt lõi chạy ổn, không còn lỗi.
+* Báo cáo đồ án và tài liệu bàn giao hoàn thiện đầy đủ.
+* Đồ án sẵn sàng bàn giao và bảo vệ.
+
+## 4. ĐÁNH GIÁ CHUNG
+
+* **Ưu điểm:** Hoàn thành đúng tiến độ, hệ thống và tài liệu đầy đủ.
+* **Khó khăn:** Cần rà soát lại định dạng và trình bày báo cáo.
+* **Hướng phát triển:** Bổ sung đăng nhập mạng xã hội, bảng xếp hạng, bình luận.
+
+## 5. PHÂN CÔNG
+
+* **Lê Việt Hoài:** Khắc phục lỗi, hoàn thiện README và báo cáo.
+* **Lê Thị Nhàn:** Kiểm thử toàn hệ thống, lập test cases.
+* **Đỗ Xuân Thủy:** Rà soát định dạng, sắp xếp tài liệu bàn giao.

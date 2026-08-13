@@ -1,187 +1,214 @@
 /* =====================================================================
    CSDL: Nhaccuatui - Website nghe nhac truc tuyen
    He quan tri: Microsoft SQL Server
-   Ghi chu: Ten bang & cot khop voi ma nguon trong thu muc src/.
-   Cach dung: Mo SSMS -> New Query -> chay toan bo file nay.
+   Phien ban: ASP.NET Core 8 MVC + ADO.NET
+   Ghi chu: Ten bang & cot khop voi ma nguon trong src/WebMusic/.
+            Mat khau luu dang BCrypt hash (cot matkhau nvarchar(100)).
+   Cach dung:
+     sqlcmd -S . -i setup/csdl.sql
+     hoac mo SSMS -> New Query -> chay toan bo file nay.
    ===================================================================== */
 
-IF DB_ID('Nhaccuatui') IS NULL
-    CREATE DATABASE [Nhaccuatui];
+USE master;
 GO
-
-USE [Nhaccuatui];
+IF DB_ID('Nhaccuatui') IS NOT NULL
+    ALTER DATABASE Nhaccuatui SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+IF DB_ID('Nhaccuatui') IS NOT NULL
+    DROP DATABASE Nhaccuatui;
+CREATE DATABASE Nhaccuatui;
 GO
-
-/* ---------- Xoa bang cu (neu chay lai) ---------- */
-IF OBJECT_ID('dbo.playlist_baihat','U') IS NOT NULL DROP TABLE dbo.playlist_baihat;
-IF OBJECT_ID('dbo.casi_baihat','U')     IS NOT NULL DROP TABLE dbo.casi_baihat;
-IF OBJECT_ID('dbo.casi_album','U')      IS NOT NULL DROP TABLE dbo.casi_album;
-IF OBJECT_ID('dbo.BaiHat','U')          IS NOT NULL DROP TABLE dbo.BaiHat;
-IF OBJECT_ID('dbo.Playlist','U')        IS NOT NULL DROP TABLE dbo.Playlist;
-IF OBJECT_ID('dbo.Album','U')           IS NOT NULL DROP TABLE dbo.Album;
-IF OBJECT_ID('dbo.ChuDe','U')           IS NOT NULL DROP TABLE dbo.ChuDe;
-IF OBJECT_ID('dbo.CaSi','U')            IS NOT NULL DROP TABLE dbo.CaSi;
-IF OBJECT_ID('dbo.TheLoai','U')         IS NOT NULL DROP TABLE dbo.TheLoai;
-IF OBJECT_ID('dbo.TaiKhoan','U')        IS NOT NULL DROP TABLE dbo.TaiKhoan;
+USE Nhaccuatui;
 GO
 
 /* ---------- Bang chinh ---------- */
 
--- Tai khoan quan tri
-CREATE TABLE dbo.TaiKhoan (
-    id            INT IDENTITY(1,1) PRIMARY KEY,
-    tendangnhap   NVARCHAR(30)  NOT NULL,
-    matkhau       NVARCHAR(10)  NULL
-);
-GO
-
 -- The loai
-CREATE TABLE dbo.TheLoai (
-    matheloai     INT IDENTITY(1,1) PRIMARY KEY,
-    tentheloai    NVARCHAR(50)  NOT NULL,
-    hinhanh       NVARCHAR(50)  NULL
+CREATE TABLE theloai (
+    matheloai  INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tentheloai NVARCHAR(50)  NOT NULL,
+    hinhanh    NVARCHAR(50)  NULL
 );
 GO
 
 -- Chu de
-CREATE TABLE dbo.ChuDe (
-    machude       INT IDENTITY(1,1) PRIMARY KEY,
-    tenchude      NVARCHAR(50)   NOT NULL,
-    motathem      NVARCHAR(1000) NULL,
-    hinhanh       NVARCHAR(50)   NULL
+CREATE TABLE chude (
+    machude   INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tenchude  NVARCHAR(50)   NOT NULL,
+    motathem  NVARCHAR(1000) NULL,
+    hinhanh   NVARCHAR(50)   NULL
 );
 GO
 
 -- Album
-CREATE TABLE dbo.Album (
-    maalbum       INT IDENTITY(1,1) PRIMARY KEY,
-    tenalbum      NVARCHAR(50)  NOT NULL,
-    hinhanh       NVARCHAR(50)  NULL
+CREATE TABLE album (
+    maalbum   INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tenalbum  NVARCHAR(50)  NOT NULL,
+    hinhanh   NVARCHAR(50)  NULL
 );
 GO
 
 -- Ca si
-CREATE TABLE dbo.CaSi (
-    macasi        INT IDENTITY(1,1) PRIMARY KEY,
-    tencasi       NVARCHAR(50)   NOT NULL,
-    namsinh       INT            NULL,
-    hinhanh       NVARCHAR(50)   NULL,
-    quequan       NVARCHAR(30)   NULL,
-    motathem      NVARCHAR(1000) NULL
+CREATE TABLE casi (
+    macasi    INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tencasi   NVARCHAR(50)   NOT NULL,
+    namsinh   INT            NULL,
+    hinhanh   NVARCHAR(50)   NULL,
+    quequan   NVARCHAR(30)   NULL,
+    motathem  NVARCHAR(1000) NULL
 );
 GO
 
--- Bai hat (thu tu cot khop voi: insert into baihat values(...))
-CREATE TABLE dbo.BaiHat (
-    mabaihat      INT IDENTITY(1,1) PRIMARY KEY,
-    tenbaihat     NVARCHAR(50)   NOT NULL,
-    hinhanh       NVARCHAR(50)   NULL,
-    loibaihat     NVARCHAR(1000) NULL,
-    tacgia        NVARCHAR(50)   NULL,
-    matheloai     INT            NOT NULL,
-    maalbum       INT            NOT NULL,
-    machude       INT            NOT NULL,
-    linkbaihat    NVARCHAR(50)   NULL,
-    CONSTRAINT FK_BaiHat_TheLoai FOREIGN KEY (matheloai) REFERENCES dbo.TheLoai(matheloai),
-    CONSTRAINT FK_BaiHat_Album   FOREIGN KEY (maalbum)   REFERENCES dbo.Album(maalbum),
-    CONSTRAINT FK_BaiHat_ChuDe   FOREIGN KEY (machude)   REFERENCES dbo.ChuDe(machude)
+-- Bai hat
+CREATE TABLE baihat (
+    mabaihat    INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tenbaihat   NVARCHAR(50)   NOT NULL,
+    hinhanh     NVARCHAR(50)   NULL,
+    loibaihat   NVARCHAR(1000) NULL,
+    tacgia      NVARCHAR(50)   NULL,
+    matheloai   INT NOT NULL,
+    maalbum     INT NOT NULL,
+    machude     INT NOT NULL,
+    linkbaihat  NVARCHAR(100)  NULL,
+    CONSTRAINT FK_BaiHat_TheLoai FOREIGN KEY (matheloai) REFERENCES theloai(matheloai),
+    CONSTRAINT FK_BaiHat_Album   FOREIGN KEY (maalbum)   REFERENCES album(maalbum),
+    CONSTRAINT FK_BaiHat_ChuDe   FOREIGN KEY (machude)   REFERENCES chude(machude)
 );
 GO
 
--- Playlist (thu tu cot khop voi: insert into playlist values(...))
-CREATE TABLE dbo.Playlist (
-    maplaylist    INT IDENTITY(1,1) PRIMARY KEY,
-    tenplaylist   NVARCHAR(50)  NOT NULL,
-    hinhanh       NVARCHAR(50)  NOT NULL,
-    matheloai     INT           NOT NULL,
-    nguoitao      NVARCHAR(50)  NULL,
-    CONSTRAINT FK_Playlist_TheLoai FOREIGN KEY (matheloai) REFERENCES dbo.TheLoai(matheloai)
+-- Playlist
+CREATE TABLE playlist (
+    maplaylist  INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tenplaylist NVARCHAR(50) NOT NULL,
+    hinhanh     NVARCHAR(50) NOT NULL,
+    matheloai   INT NOT NULL,
+    nguoitao    NVARCHAR(50) NULL,
+    CONSTRAINT FK_Playlist_TheLoai FOREIGN KEY (matheloai) REFERENCES theloai(matheloai)
 );
 GO
 
 /* ---------- Bang trung gian (nhieu - nhieu) ---------- */
 
 -- Ca si - Album
-CREATE TABLE dbo.casi_album (
-    id       INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE casi_album (
+    id       INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     macasi   INT NOT NULL,
     maalbum  INT NOT NULL,
-    CONSTRAINT FK_CaSiAlbum_CaSi  FOREIGN KEY (macasi)  REFERENCES dbo.CaSi(macasi),
-    CONSTRAINT FK_CaSiAlbum_Album FOREIGN KEY (maalbum) REFERENCES dbo.Album(maalbum)
+    CONSTRAINT FK_CaSiAlbum_CaSi  FOREIGN KEY (macasi)  REFERENCES casi(macasi)  ON DELETE CASCADE,
+    CONSTRAINT FK_CaSiAlbum_Album FOREIGN KEY (maalbum) REFERENCES album(maalbum) ON DELETE CASCADE
 );
 GO
 
 -- Ca si - Bai hat
-CREATE TABLE dbo.casi_baihat (
-    id        INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE casi_baihat (
+    id        INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     macasi    INT NOT NULL,
     mabaihat  INT NOT NULL,
-    CONSTRAINT FK_CaSiBaiHat_CaSi   FOREIGN KEY (macasi)   REFERENCES dbo.CaSi(macasi),
-    CONSTRAINT FK_CaSiBaiHat_BaiHat FOREIGN KEY (mabaihat) REFERENCES dbo.BaiHat(mabaihat)
+    CONSTRAINT FK_CaSiBaiHat_CaSi   FOREIGN KEY (macasi)   REFERENCES casi(macasi)   ON DELETE CASCADE,
+    CONSTRAINT FK_CaSiBaiHat_BaiHat FOREIGN KEY (mabaihat) REFERENCES baihat(mabaihat) ON DELETE CASCADE
 );
 GO
 
 -- Playlist - Bai hat
-CREATE TABLE dbo.playlist_baihat (
-    id          INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE playlist_baihat (
+    id          INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     maplaylist  INT NOT NULL,
     mabaihat    INT NOT NULL,
-    CONSTRAINT FK_PLBH_Playlist FOREIGN KEY (maplaylist) REFERENCES dbo.Playlist(maplaylist),
-    CONSTRAINT FK_PLBH_BaiHat   FOREIGN KEY (mabaihat)   REFERENCES dbo.BaiHat(mabaihat)
+    CONSTRAINT FK_PLBH_Playlist FOREIGN KEY (maplaylist) REFERENCES playlist(maplaylist) ON DELETE CASCADE,
+    CONSTRAINT FK_PLBH_BaiHat   FOREIGN KEY (mabaihat)   REFERENCES baihat(mabaihat)     ON DELETE CASCADE
+);
+GO
+
+-- Tai khoan (matkhau nvarchar(100) chua hash BCrypt)
+CREATE TABLE taikhoan (
+    id           INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    tendangnhap  NVARCHAR(30)  NOT NULL,
+    matkhau      NVARCHAR(100) NULL
 );
 GO
 
 /* =====================================================================
    DU LIEU MAU (seed data)
+   File nhac + anh nam trong src/WebMusic/wwwroot/audio va wwwroot/images
    ===================================================================== */
 
--- Tai khoan quan tri mac dinh
-INSERT INTO dbo.TaiKhoan (tendangnhap, matkhau) VALUES
-(N'admin', N'123456');
-GO
-
 -- The loai
-INSERT INTO dbo.TheLoai (tentheloai, hinhanh) VALUES
-(N'Nhac tre',   N'theloai/nhactre.jpg'),
-(N'Ballad',     N'theloai/ballad.jpg'),
-(N'Rap',        N'theloai/rap.jpg');
+INSERT INTO theloai (tentheloai, hinhanh) VALUES
+(N'Nhạc trẻ',         'pic4.png'),
+(N'Nhạc trẻ tình',    'pic1.jpg'),
+(N'Pop Việt',         'pic2.jpg'),
+(N'Rap Việt',         'pic3.jpg');
 GO
 
 -- Chu de
-INSERT INTO dbo.ChuDe (tenchude, motathem, hinhanh) VALUES
-(N'Tam trang', N'Nhung bai hat nhe nhang, sau lang', N'chude/tamtrang.jpg'),
-(N'Soi dong',  N'Nhac soi dong, tiec tung',          N'chude/soidong.jpg');
+INSERT INTO chude (tenchude, motathem, hinhanh) VALUES
+(N'Hot V-Pop',         N'Những bài hát V-Pop hot nhất hiện tại', 'pic1.jpg'),
+(N'Bài hát yêu thích', N'Tuyển tập bài hát được yêu thích',     'pic2.jpg'),
+(N'Tình ca bolero',    N'Bolero trữ tình',                      'pic3.jpg');
 GO
 
 -- Album
-INSERT INTO dbo.Album (tenalbum, hinhanh) VALUES
-(N'Album Vol.1', N'album/vol1.jpg'),
-(N'Single Hits', N'album/single.jpg');
+INSERT INTO album (tenalbum, hinhanh) VALUES
+(N'Sai người sai thời điểm', 'pic7.jpg'),
+(N'Cảm em chờ',              'pic2.jpg'),
+(N'Tìm',                     'pic3.jpg');
 GO
 
 -- Ca si
-INSERT INTO dbo.CaSi (tencasi, namsinh, hinhanh, quequan, motathem) VALUES
-(N'MIN',        1997, N'casi/min.jpg',       N'Ha Noi',   N'Ca si nhac tre'),
-(N'Mr. A',      1990, N'casi/mra.jpg',       N'TP.HCM',   N'Rapper'),
-(N'Thanh Hung', 1995, N'casi/thanhhung.jpg', N'Nghe An',  N'Ca si ballad');
+INSERT INTO casi (tencasi, namsinh, hinhanh, quequan, motathem) VALUES
+(N'Thanh Hùng', 1992, '1.jpg', N'Hải Dương', N'Ca sĩ trẻ thể loại pop ballad.'),
+(N'MIN',        1988, '2.jpg', N'Hà Nội',   N'Ca sĩ tự sáng tác, indie pop.');
 GO
 
--- Bai hat (matheloai, maalbum, machude tham chieu du lieu o tren)
-INSERT INTO dbo.BaiHat (tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat) VALUES
-(N'Co Em Cho',            N'baihat/coemcho.jpg', N'...', N'MIN, Mr. A',   1, 1, 2, N'audio/Co-Em-Cho-MIN-Mr-A.mp3'),
-(N'Tim',                  N'baihat/tim.jpg',     N'...', N'MIN, Mr. A',   1, 1, 1, N'audio/Tim-MIN-Mr-A.mp3'),
-(N'Sai Nguoi Sai Thoi Diem', N'baihat/snstd.jpg', N'...', N'Thanh Hung', 2, 2, 1, N'audio/Sai-Nguoi-Sai-Thoi-Diem-Thanh-Hung.mp3');
+-- Bai hat (4 bai, 3 bai co file mp3 trong wwwroot/audio)
+INSERT INTO baihat (tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat) VALUES
+(N'Sai người sai thời điểm', 'pic1.jpg',
+ N'Chuyện tình yêu lúc nào cũng thế, đi mãi bao năm lê thê mong tìm được ai. Sai người sai thời điểm, để rồi mất nhau...',
+ N'Thanh Hùng', 1, 1, 1, 'Sai-Nguoi-Sai-Thoi-Diem-Thanh-Hung.mp3'),
+(N'Cảm em chờ', 'pic2.jpg',
+ N'Cảm em chờ, cảm em đã chờ, chờ một người chưa từng quay về. Cảm em nhớ, cảm em đã nhớ...',
+ N'MIN', 2, 2, 1, 'Co-Em-Cho-MIN-Mr-A.mp3'),
+(N'Tìm', 'pic3.jpg',
+ N'Tìm một bờ vai, tìm một vòng tay, tìm nơi bình yên để gác những âu lo.',
+ N'MIN', 4, 3, 2, 'Tim-MIN-Mr-A.mp3'),
+(N'Chờ', 'pic4.jpg',
+ N'Anh vẫn chờ, dẫu biết em không về.',
+ N'Thanh Hùng', 1, 1, 1, NULL);
 GO
 
 -- Playlist
-INSERT INTO dbo.Playlist (tenplaylist, hinhanh, matheloai, nguoitao) VALUES
-(N'Chill mỗi ngày', N'playlist/chill.jpg', 2, N'admin');
+INSERT INTO playlist (tenplaylist, hinhanh, matheloai, nguoitao) VALUES
+(N'Nhạc Việt hot',      'pic1.jpg', 1, N'V.A'),
+(N'Bài hát yêu thích',  'pic2.jpg', 2, N'V.A'),
+(N'Indie Việt',         'pic3.jpg', 3, N'MIN');
 GO
 
--- Quan he mau
-INSERT INTO dbo.casi_album  (macasi, maalbum)   VALUES (1,1),(2,1),(3,2);
-INSERT INTO dbo.casi_baihat (macasi, mabaihat)  VALUES (1,1),(2,1),(1,2),(2,2),(3,3);
-INSERT INTO dbo.playlist_baihat (maplaylist, mabaihat) VALUES (1,1),(1,2),(1,3);
+-- Junction CaSi <-> BaiHat
+--   macasi 1 = Thanh Hung -> bai 1, 4 ; macasi 2 = MIN -> bai 2, 3
+INSERT INTO casi_baihat (macasi, mabaihat) VALUES
+(1, 1), (1, 4), (2, 2), (2, 3);
+GO
+
+-- Junction CaSi <-> Album
+--   macasi 1 -> album 1 ; macasi 2 -> album 2, 3
+INSERT INTO casi_album (macasi, maalbum) VALUES
+(1, 1), (2, 2), (2, 3);
+GO
+
+-- Junction Playlist <-> BaiHat
+INSERT INTO playlist_baihat (maplaylist, mabaihat) VALUES
+(1, 1), (1, 2), (1, 3),
+(2, 1), (2, 4),
+(3, 2), (3, 3);
+GO
+
+-- Tai khoan (BCrypt hash, workFactor 11)
+--   admin / 123
+--   huyen / 123456
+INSERT INTO taikhoan (tendangnhap, matkhau) VALUES
+('admin',
+ '$2a$11$PaMQhBC0Ulw4Je7ak8XLZuGF8U9CNlxXCQFhuOoEU2m3e/dIvn31S'),
+('huyen',
+ '$2a$11$KW0i11JHl1oDSp7HWjuTXuiRAQ92URwTtKulBZE4r2EHoeH6yi6JO');
 GO
 
 PRINT N'>> Tao CSDL Nhaccuatui va du lieu mau thanh cong!';

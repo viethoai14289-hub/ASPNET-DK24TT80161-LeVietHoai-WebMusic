@@ -1,0 +1,35 @@
+@model TheLoaiVM
+@{
+    ViewData["Title"] = "Thể loại";
+}
+
+<section class="section">
+    <h2>Thể loại</h2>
+    <div class="card-grid">
+        @foreach (var tl in Model.TheLoais)
+        {
+            <a class="card @(Model.SelectedId == tl.MaTheLoai ? "active" : "")"
+               asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
+                <img src="~/images/theloai/@tl.HinhAnh" alt="@tl.TenTheLoai" />
+                <span>@tl.TenTheLoai</span>
+            </a>
+        }
+    </div>
+</section>
+
+@if (Model.Playlists.Any())
+{
+    <section class="section">
+        <h2>Playlist theo thể loại</h2>
+        <div class="card-grid">
+            @foreach (var pl in Model.Playlists)
+            {
+                <a class="card" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
+                    <img src="~/images/playlist/@pl.HinhAnh" alt="@pl.TenPlayList" />
+                    <span>@pl.TenPlayList</span>
+                    <small>@pl.NguoiTao</small>
+                </a>
+            }
+        </div>
+    </section>
+}

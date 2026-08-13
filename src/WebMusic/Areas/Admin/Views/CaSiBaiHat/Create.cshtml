@@ -1,0 +1,22 @@
+@model CaSiBaiHat
+@{
+    ViewData["Title"] = "Thêm Ca sĩ - Bài hát";
+    var cs = ViewBag.CaSis as List<CaSi> ?? new();
+    var bh = ViewBag.BaiHats as List<BaiHat> ?? new();
+}
+<h1>Thêm Ca sĩ - Bài hát</h1>
+<form method="post" class="admin-form">
+    @Html.AntiForgeryToken()
+    <label>Ca sĩ
+        <select name="maCaSi">
+            @foreach (var c in cs) { <option value="@c.MaCaSi">@c.TenCaSi</option> }
+        </select>
+    </label>
+    <label>Bài hát
+        <select name="maBaiHat">
+            @foreach (var b in bh) { <option value="@b.MaBaiHat">@b.TenBaiHat</option> }
+        </select>
+    </label>
+    <button type="submit" class="btn-primary">Lưu</button>
+    <a asp-action="Index" class="btn-link">Hủy</a>
+</form>

@@ -1,0 +1,26 @@
+@model IEnumerable<Album>
+@{ ViewData["Title"] = "Quản lý album"; }
+<div class="admin-toolbar">
+    <h1>Album</h1>
+    <a class="btn-primary" asp-action="Create">+ Thêm album</a>
+</div>
+<table class="admin-table">
+    <thead><tr><th>Mã</th><th>Ảnh</th><th>Tên album</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var ab in Model)
+        {
+            <tr>
+                <td>@ab.MaAlbum</td>
+                <td><img src="~/images/album/@ab.HinhAnh" alt="" class="thumb" /></td>
+                <td>@ab.TenAlbum</td>
+                <td class="row-actions">
+                    <a asp-action="Edit" asp-route-id="@ab.MaAlbum">Sửa</a>
+                    <form asp-action="Delete" asp-route-id="@ab.MaAlbum" method="post" onsubmit="return confirm('Xóa album này?')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
