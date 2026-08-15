@@ -1,0 +1,10 @@
+.admin-sidebar { width: 240px; position: fixed; top: 0; left: 0; bottom: 0; z-index: 1030; overflow-y: auto; }
+.admin-sidebar .nav-link { color: rgba(255,255,255,.8); border-radius: .375rem; padding: .5rem .75rem; }
+.admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active { color: #fff; background: rgba(var(--bs-primary-rgb), .25); }
+@media (min-width: 992px) { .admin-content { margin-left: 240px; } }
+
+.wm-cover-xs { width: 48px; height: 48px; object-fit: cover; }
+.wm-cover-md { width: 96px; height: 96px; object-fit: cover; }
+.wm-card-form { max-width: 640px; }
+.wm-td-truncate { max-width: 240px; }
+.wm-chart-wrap { position: relative; height: 300px; }

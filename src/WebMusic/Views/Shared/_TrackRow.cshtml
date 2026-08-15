@@ -1,0 +1,20 @@
+@model BaiHat
+<div class="musico-track">
+    <div class="thumb">
+        <img src="~/images/baihat/@Model.HinhAnh" alt="@Model.TenBaiHat" />
+    </div>
+    <a class="track-info text-decoration-none" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@Model.MaBaiHat">
+        <h4 class="text-truncate">@Model.TenBaiHat</h4>
+        <p class="text-truncate">@Model.TacGia</p>
+    </a>
+    <span class="small flex-shrink-0 d-none d-sm-inline" style="color:#b3b3b3">@($"{Model.Duration/60}:{Model.Duration%60:D2}")</span>
+    <span class="badge rounded-pill flex-shrink-0 d-none d-md-inline-block" style="background:rgba(29,185,84,.15);color:#1db954">@Model.LuotNghe lượt nghe</span>
+    @if (!string.IsNullOrEmpty(Model.LinkBaiHat))
+    {
+        <button type="button" class="btn wm-btn-play-md wm-play-overlay-static rounded-circle flex-shrink-0"
+                style="background:#1db954;border-color:#1db954;color:#fff"
+                data-src="/audio/@Model.LinkBaiHat" data-title="@Model.TenBaiHat"
+                data-cover="/images/baihat/@Model.HinhAnh" data-id="@Model.MaBaiHat"
+                aria-label="Phát @Model.TenBaiHat"><svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+    }
+</div>

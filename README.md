@@ -47,9 +47,12 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 ## Người dùng (Frontend)
 
 * Xem trang chủ với slideshow (Bootstrap Carousel) và 4 danh sách: thể loại, chủ đề, album, bài hát.
+* **Player bar cố định** phát liên tục qua các trang (lưu trạng thái `localStorage`, có nút đóng).
 * Nghe nhạc trực tuyến bằng `<audio>` native, xem lời bài hát.
+* **Top thịnh hành** — trang `/BaiHat/Top` xếp hạng theo lượt nghe.
+* **Bài hát liên quan** — gợi ý cuối trang chi tiết theo cùng thể loại.
 * Xem danh sách và trang chi tiết của:
-  * Bài hát
+  * Bài hát (kèm lượt nghe)
   * Ca sĩ (gộp bài hát + album của ca sĩ qua join)
   * Album
   * Chủ đề
@@ -59,15 +62,18 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 * Nghe nhạc theo Playlist.
 * Tìm kiếm theo 1 từ khóa (`q`), tìm trên 6 thực thể, chỉ hiển thị mục có kết quả.
 * Đăng nhập / Đăng ký tài khoản (cookie auth, BCrypt, validate phía server).
+* **Yêu thích bài hát** (❤️) + trang **"Nhạc của tôi"** (`/YeuThich/MyMusic`) cho thành viên đăng nhập.
 
 ## Quản trị viên (Admin, area `/Admin`)
 
-* Toàn bộ area đặt `[Authorize]` — chưa đăng nhập chuyển về trang đăng nhập.
+* Toàn bộ area đặt `[Authorize(Roles = "Admin")]` — chỉ vai trò Admin được vào, người thường về trang đăng nhập / AccessDenied.
+* **Phân quyền theo vai trò** (`vaitro`: Admin / User), đăng nhập gắn `ClaimTypes.Role`.
+* **Dashboard quản trị** (`/Admin`) — thẻ thống kê + biểu đồ Chart.js (Top 5 lượt nghe).
 * Đăng nhập và đăng ký tài khoản quản trị.
 * Quản lý (Thêm / Sửa / Xóa) đầy đủ cho **10 thực thể**:
   * Bài hát, Ca sĩ, Album, Thể loại, Chủ đề, Playlist
   * 3 bảng junction: Ca sĩ – Bài hát, Ca sĩ – Album, Playlist – Bài hát
-  * Tài khoản
+  * Tài khoản (chọn vai trò khi tạo/sửa)
 * Tải lên hình ảnh qua `IFormFile` vào `wwwroot/images/<entity>/`.
 * Antiforgery token trên mọi form POST, hộp thoại xác nhận khi xóa.
 
@@ -113,14 +119,15 @@ webmusicASP/
 │
 ├── src/
 │   └── WebMusic/         # Mã nguồn ASP.NET Core 8 MVC
-│       ├── Areas/Admin/  # Khu quản trị (10 controller + views CRUD, [Authorize])
-│       ├── Controllers/  # Khu người dùng (9 controller)
+│       ├── Areas/Admin/  # Khu quản trị (11 controller + views CRUD, [Authorize(Roles=Admin)])
+│       ├── Controllers/  # Khu người dùng (10 controller)
 │       ├── Data/         # Db.cs (connection helper)
-│       ├── Models/       # 10 entity (POCO)
-│       ├── Services/     # 8 service + interface (ADO.NET)
+│       ├── Models/       # 11 entity (POCO)
+│       ├── Services/     # 9 service + interface (ADO.NET)
 │       ├── ViewModels/   # DTO cho view phức tạp
 │       ├── Views/        # Razor views (FE) + _Layout (Bootstrap dark)
 │       ├── wwwroot/
+│       │   ├── js/player.js  # player bar localStorage
 │       │   ├── images/
 │       │   └── audio/
 │       ├── Program.cs
@@ -161,8 +168,9 @@ sqlcmd -S . -i setup/csdl.sql
 Script `csdl.sql` tự động:
 
 * Drop + tạo lại DB `Nhaccuatui`.
-* Tạo 10 bảng + khóa ngoại (junction có `ON DELETE CASCADE`).
-* Seed dữ liệu mẫu (bài hát, ca sĩ, album, chủ đề, thể loại, playlist, các junction, 2 tài khoản đã hash BCrypt).
+* Tạo 12 bảng + khóa ngoại (junction + `yeuthich` có `ON DELETE CASCADE`).
+* Bảng `baihat` có cột `luotnghe`; `taikhoan` có cột `vaitro` (Admin/User).
+* Seed dữ liệu mẫu (bài hát, ca sĩ, album, chủ đề, thể loại, playlist, các junction, 2 tài khoản đã hash BCrypt: admin/123 vai trò Admin, huyen/123456 vai trò User).
 
 ### Bước 3. Cấu hình chuỗi kết nối
 

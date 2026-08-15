@@ -3,20 +3,19 @@
     ViewData["Title"] = "Bài hát";
 }
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Bài hát</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var bh in Model)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
-                    <img src="~/images/baihat/@bh.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@bh.TenBaiHat" />
-                    <div class="card-body p-2">
-                        <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
-                        <small class="text-muted">@bh.TacGia</small>
-                    </div>
-                </a>
-            </div>
-        }
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Bài hát</h1>
     </div>
-</section>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            @foreach (var bh in Model)
+            {
+                @await Html.PartialAsync("_TrackRow", bh)
+            }
+        </div>
+    </div>
+</div>

@@ -56,7 +56,7 @@ public class CaSiService : ICaSiService
         {
             con.Open();
             using var cmd1 = new SqlCommand(
-                "SELECT b.mabaihat, b.tenbaihat, b.hinhanh, b.loibaihat, b.tacgia, b.matheloai, b.maalbum, b.machude, b.linkbaihat " +
+                "SELECT b.mabaihat, b.tenbaihat, b.hinhanh, b.loibaihat, b.tacgia, b.matheloai, b.maalbum, b.machude, b.linkbaihat, b.luotnghe, b.duration " +
                 "FROM baihat b JOIN casi_baihat cb ON b.mabaihat = cb.mabaihat WHERE cb.macasi=@id", con);
             cmd1.Parameters.AddWithValue("@id", id);
             using var rd1 = cmd1.ExecuteReader();
@@ -113,7 +113,6 @@ public class CaSiService : ICaSiService
         cmd.ExecuteNonQuery();
     }
 
-    // --- junction casi_baihat ---
     public List<CaSiBaiHat> GetAllBaiHat()
     {
         var list = new List<CaSiBaiHat>();
@@ -160,7 +159,6 @@ public class CaSiService : ICaSiService
         return rd.Read() ? new CaSiBaiHat { Id = (int)rd["id"], MaCaSi = (int)rd["macasi"], MaBaiHat = (int)rd["mabaihat"] } : null;
     }
 
-    // --- junction casi_album ---
     public List<CaSiAlbum> GetAllAlbum()
     {
         var list = new List<CaSiAlbum>();

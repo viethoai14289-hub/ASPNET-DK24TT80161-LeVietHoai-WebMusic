@@ -6,7 +6,7 @@ using WebMusic.Services;
 namespace WebMusic.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class TaiKhoanController : Controller
 {
     private readonly IAccountService _sv;
@@ -19,7 +19,8 @@ public class TaiKhoanController : Controller
     [HttpPost, ValidateAntiForgeryToken]
     public IActionResult Create(TaiKhoan tk, string matkhau)
     {
-        if (!string.IsNullOrEmpty(matkhau)) _sv.Register(tk.TenDangNhap, matkhau);
+        if (!string.IsNullOrEmpty(matkhau))
+            _sv.RegisterWithRole(tk.TenDangNhap, matkhau, tk.VaiTro);
         return RedirectToAction(nameof(Index));
     }
 

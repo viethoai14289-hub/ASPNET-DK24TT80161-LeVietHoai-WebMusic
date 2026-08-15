@@ -3,39 +3,51 @@
     ViewData["Title"] = "Thể loại";
 }
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Thể loại</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Thể loại</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 mb-4">
         @foreach (var tl in Model.TheLoais)
         {
             <div class="col">
-                <a class="card h-100 text-decoration-none text-body @(Model.SelectedId == tl.MaTheLoai ? "border border-success border-2" : "")"
+                <a class="musico-gallery-item text-decoration-none @(Model.SelectedId == tl.MaTheLoai ? "border border-2" : "")"
+                   style="@(Model.SelectedId == tl.MaTheLoai ? "border-color:#1db954" : "")"
                    asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
-                    <img src="~/images/theloai/@tl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@tl.TenTheLoai" />
-                    <div class="card-body p-2"><span class="fw-semibold small">@tl.TenTheLoai</span></div>
+                    <img src="~/images/theloai/@tl.HinhAnh" alt="@tl.TenTheLoai" />
+                    <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                    <div class="musico-gallery-caption"><h6>@tl.TenTheLoai</h6></div>
                 </a>
             </div>
         }
     </div>
-</section>
 
-@if (Model.Playlists.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Playlist theo thể loại</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var pl in Model.Playlists)
+    @if (Model.SelectedId is not null)
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Playlist theo thể loại</h2>
+            @if (Model.Playlists.Any())
             {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
-                        <img src="~/images/playlist/@pl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@pl.TenPlayList" />
-                        <div class="card-body p-2">
-                            <span class="fw-semibold small d-block text-truncate">@pl.TenPlayList</span>
-                            <small class="text-muted">@pl.NguoiTao</small>
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                    @foreach (var pl in Model.Playlists)
+                    {
+                        <div class="col">
+                            <a class="musico-gallery-item text-decoration-none" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
+                                <img src="~/images/playlist/@pl.HinhAnh" alt="@pl.TenPlayList" />
+                                <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                                <div class="musico-gallery-caption"><h6 class="text-truncate">@pl.TenPlayList</h6><small>@pl.NguoiTao</small></div>
+                            </a>
                         </div>
-                    </a>
+                    }
                 </div>
             }
-        </div>
-    </section>
-}
+            else
+            {
+                <p style="color:#b3b3b3" class="text-center">Chưa có playlist thuộc thể loại này.</p>
+            }
+        </section>
+    }
+</div>

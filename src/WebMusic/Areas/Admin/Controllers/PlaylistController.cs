@@ -6,7 +6,7 @@ using WebMusic.Services;
 namespace WebMusic.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class PlaylistController : Controller
 {
     private readonly IPlaylistService _sv;

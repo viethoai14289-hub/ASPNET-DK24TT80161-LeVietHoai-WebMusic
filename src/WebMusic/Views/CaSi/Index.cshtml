@@ -3,17 +3,23 @@
     ViewData["Title"] = "Ca sĩ";
 }
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Ca sĩ</h2>
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Ca sĩ</h1>
+    </div>
+</div>
+
+<div class="container">
     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
         @foreach (var cs in Model)
         {
             <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
-                    <img src="~/images/casi/@cs.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cs.TenCaSi" />
-                    <div class="card-body p-2"><span class="fw-semibold small">@cs.TenCaSi</span></div>
+                <a class="musico-gallery-item text-decoration-none" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
+                    <img src="~/images/casi/@cs.HinhAnh" alt="@cs.TenCaSi" style="border-radius:50%" />
+                    <div class="musico-gallery-overlay" style="border-radius:50%"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                    <div class="musico-gallery-caption text-center" style="background:none"><h6>@cs.TenCaSi</h6></div>
                 </a>
             </div>
         }
     </div>
-</section>
+</div>

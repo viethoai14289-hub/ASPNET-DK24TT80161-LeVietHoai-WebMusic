@@ -3,9 +3,9 @@
 <h1 class="h3 mb-3">Sửa chủ đề</h1>
 @if (!string.IsNullOrEmpty(Model.HinhAnh))
 {
-    <img src="~/images/chude/@Model.HinhAnh" alt="" class="rounded mb-3" style="width:96px;height:96px;object-fit:cover" />
+    <img src="~/images/chude/@Model.HinhAnh" alt="" class="rounded mb-3 wm-cover-md" />
 }
-<div class="card" style="max-width:640px">
+<div class="card wm-card-form">
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()

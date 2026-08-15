@@ -11,11 +11,11 @@ public class HomeController : Controller
     private readonly IChuDeService _cd;
     private readonly IAlbumService _ab;
     private readonly IBaiHatService _bh;
+    private readonly ICaSiService _cs;
 
-    public HomeController(ITheLoaiService tl, IChuDeService cd, IAlbumService ab, IBaiHatService bh)
-    { _tl = tl; _cd = cd; _ab = ab; _bh = bh; }
+    public HomeController(ITheLoaiService tl, IChuDeService cd, IAlbumService ab, IBaiHatService bh, ICaSiService cs)
+    { _tl = tl; _cd = cd; _ab = ab; _bh = bh; _cs = cs; }
 
-    // TrangChu: 4 list (theoloai, chude top5, album top6, baihat)
     public IActionResult Index()
     {
         var vm = new TrangChuVM
@@ -23,7 +23,9 @@ public class HomeController : Controller
             TheLoais = _tl.GetAll(),
             ChuDes = _cd.GetTop5(),
             Albums = _ab.GetTop6(),
-            BaiHats = _bh.GetAll()
+            BaiHats = _bh.GetAll(),
+            CaSis = _cs.GetAll(),
+            TopBaiHats = _bh.GetTop(5)
         };
         return View(vm);
     }

@@ -1,0 +1,26 @@
+@model IEnumerable<BaiHat>
+@{
+    ViewData["Title"] = "Nhạc của tôi";
+}
+
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Nhạc của tôi ❤️</h1>
+    </div>
+</div>
+
+<div class="container">
+    @if (!Model.Any())
+    {
+        <p style="color:#b3b3b3" class="text-center">Chưa có bài hát yêu thích nào. Bấm trái tim trên trang chi tiết để thêm.</p>
+    }
+    else
+    {
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+            @foreach (var bh in Model)
+            {
+                @await Html.PartialAsync("_SongCard", bh)
+            }
+        </div>
+    }
+</div>

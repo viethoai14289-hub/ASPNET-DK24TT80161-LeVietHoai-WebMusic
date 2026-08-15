@@ -1,0 +1,47 @@
+@model IEnumerable<BaiHat>
+@{
+    ViewData["Title"] = "Top thịnh hành";
+    var list = Model.ToList();
+    var max = list.Any() ? list.Max(b => b.LuotNghe) : 1;
+}
+
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Top thịnh hành 🔥</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            @for (var i = 0; i < list.Count; i++)
+            {
+                var bh = list[i];
+                var pct = max > 0 ? (int)Math.Round(bh.LuotNghe * 100.0 / max) : 0;
+                <div class="musico-track">
+                    <span class="track-rank">@(i + 1)</span>
+                    <div class="thumb">
+                        <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" />
+                    </div>
+                    <a class="track-info text-decoration-none" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                        <h4 class="text-truncate">@bh.TenBaiHat</h4>
+                        <p class="text-truncate">@bh.TacGia</p>
+                    </a>
+                    <div class="wm-play-bar d-none d-md-block" title="@bh.LuotNghe lượt nghe">
+                        <span style="width:@(pct)%"></span>
+                    </div>
+                    <span class="small flex-shrink-0" style="color:#b3b3b3;min-width:46px;text-align:right">@($"{bh.Duration/60}:{bh.Duration%60:D2}")</span>
+                    <span class="small flex-shrink-0 d-none d-lg-inline" style="color:#b3b3b3;min-width:70px;text-align:right">@bh.LuotNghe</span>
+                    @if (!string.IsNullOrEmpty(bh.LinkBaiHat))
+                    {
+                        <button type="button" class="btn wm-btn-play-md wm-play-overlay-static rounded-circle flex-shrink-0"
+                                style="background:#1db954;border-color:#1db954;color:#fff"
+                                data-src="/audio/@bh.LinkBaiHat" data-title="@bh.TenBaiHat"
+                                data-cover="/images/baihat/@bh.HinhAnh" data-id="@bh.MaBaiHat"
+                                aria-label="Phát @bh.TenBaiHat"><svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -16,12 +16,23 @@
 * Rà soát chức năng CRUD của khu quản trị, chỉnh lại luồng thêm/sửa/xóa cho nhất quán.
 * Migration giao diện: thay CSS/JS thuần bằng Bootstrap 5.3.3 (dark mode cho khu người dùng, light cho khu quản trị) + jQuery 3.7.1 qua CDN.
 * Viết lại 2 layout + toàn bộ view (khu người dùng và khu quản trị) dùng component Bootstrap (navbar, card grid, table, form, carousel thay slideshow cũ).
+* Responsive đầy đủ tablet/mobile, khu quản trị đổi sang menu dọc (sidebar) + offcanvas.
+* Bổ sung 5 chức năng mới:
+  * Phân quyền theo vai trò (cột vaitro, [Authorize(Roles=Admin)], claim Role) — chỉ Admin vào được khu quản trị.
+  * Lượt nghe + trang Top thịnh hành (cột luotnghe, tăng khi xem chi tiết, seed số liệu mẫu).
+  * Yêu thích bài hát + trang "Nhạc của tôi" cho thành viên đăng nhập (bảng yeuthich).
+  * Player bar cố định phát liên tục qua các trang (localStorage).
+  * Bài hát liên quan ở cuối trang chi tiết.
+  * Dashboard quản trị có biểu đồ Chart.js (Top 5 lượt nghe).
+* Cấu hình cookie authentication chuẩn (tên cookie riêng, SameSite=Lax, persistent 2h).
+* Sửa lỗi route admin, dọn .gitignore chuẩn ASP.NET Core (bỏ bin/obj khỏi git).
 * Kiểm tra lại chức năng phát nhạc và hiển thị lời bài hát trên trang chi tiết.
 * Chuẩn bị dàn ý mới cho báo cáo đồ án, sắp xếp lại các mục nội dung.
 
 ## 3. KẾT QUẢ
 
 * Các chức năng quản trị hoạt động ổn định, ít phát sinh lỗi.
+* 5 chức năng mới hoạt động đúng, tăng tính hoàn thiện và bảo mật cho hệ thống.
 * Dàn ý báo cáo mới đã được thống nhất trong nhóm.
 
 ## 4. ĐÁNH GIÁ CHUNG

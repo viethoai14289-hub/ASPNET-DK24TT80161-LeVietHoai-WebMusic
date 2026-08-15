@@ -3,8 +3,11 @@
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 mb-0">Tổng quan hệ thống</h1>
-    <span class="text-muted">Xin chào, @User.Identity?.Name</span>
+    <div>
+        <h1 class="h3 mb-0">Tổng quan hệ thống</h1>
+        <p class="text-muted small mb-0">Thống kê và quản lý toàn bộ dữ liệu website.</p>
+    </div>
+    <span class="text-muted small">Đăng nhập: @User.Identity?.Name</span>
 </div>
 
 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 mb-4">
@@ -87,6 +90,15 @@
     </div>
 </div>
 
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="h5 mb-3">Top 5 bài hát nghe nhiều</h2>
+        <div class="wm-chart-wrap">
+            <canvas id="topChart"></canvas>
+        </div>
+    </div>
+</div>
+
 <div class="card">
     <div class="card-body">
         <h2 class="h5 mb-3">Liên kết nhanh</h2>
@@ -97,3 +109,24 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+        const _titles = @Html.Raw(Json.Serialize(ViewBag.TopTitles)) ?? [];
+        const _views  = @Html.Raw(Json.Serialize(ViewBag.TopViews))  ?? [];
+        if (Array.isArray(_titles) && _titles.length) {
+            new Chart(document.getElementById('topChart'), {
+                type: 'bar',
+                data: {
+                    labels: _titles,
+                    datasets: [{ label: 'Lượt nghe', data: _views, backgroundColor: '#0d6efd' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+            });
+        } else {
+            document.getElementById('topChart').parentElement.innerHTML =
+                '<p class="text-muted text-center mt-4">Chưa có dữ liệu lượt nghe.</p>';
+        }
+    </script>
+}

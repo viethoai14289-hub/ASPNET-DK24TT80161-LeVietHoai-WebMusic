@@ -78,7 +78,7 @@ public class PlaylistService : IPlaylistService
         var list = new List<BaiHat>();
         using var con = Db.CreateConnection(); con.Open();
         using var cmd = new SqlCommand(
-            "SELECT b.mabaihat, b.tenbaihat, b.hinhanh, b.loibaihat, b.tacgia, b.matheloai, b.maalbum, b.machude, b.linkbaihat " +
+            "SELECT b.mabaihat, b.tenbaihat, b.hinhanh, b.loibaihat, b.tacgia, b.matheloai, b.maalbum, b.machude, b.linkbaihat, b.luotnghe, b.duration " +
             "FROM baihat b JOIN playlist_baihat pb ON b.mabaihat = pb.mabaihat WHERE pb.maplaylist=@id", con);
         cmd.Parameters.AddWithValue("@id", maPlaylist);
         using var rd = cmd.ExecuteReader();
@@ -86,7 +86,6 @@ public class PlaylistService : IPlaylistService
         return list;
     }
 
-    // --- junction playlist_baihat ---
     public List<PlaylistBaiHat> GetAllBaiHat()
     {
         var list = new List<PlaylistBaiHat>();

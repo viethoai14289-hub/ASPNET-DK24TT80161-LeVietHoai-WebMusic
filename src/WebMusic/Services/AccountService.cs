@@ -7,8 +7,10 @@ namespace WebMusic.Services;
 public interface IAccountService
 {
     bool Validate(string tenDangNhap, string matKhau);
+    TaiKhoan? GetByTenDangNhap(string tenDangNhap);
     bool IsUsernameTaken(string tenDangNhap);
     bool Register(string tenDangNhap, string matKhau);
+    bool RegisterWithRole(string tenDangNhap, string matKhau, string vaiTro);
     List<TaiKhoan> GetAll();
     TaiKhoan? GetById(int id);
     void Update(TaiKhoan tk, string? newMatKhau);
@@ -33,17 +35,22 @@ public class AccountService : IAccountService
         return BCrypt.Net.BCrypt.Verify(matKhau, tk.MatKhau);
     }
 
+    public TaiKhoan? GetByTenDangNhap(string tenDangNhap) => GetByUsername(tenDangNhap);
+
     public bool IsUsernameTaken(string tenDangNhap) => GetByUsername(tenDangNhap) is not null;
 
-    public bool Register(string tenDangNhap, string matKhau)
+    public bool Register(string tenDangNhap, string matKhau) => RegisterWithRole(tenDangNhap, matKhau, "User");
+
+    public bool RegisterWithRole(string tenDangNhap, string matKhau, string vaiTro)
     {
         if (IsUsernameTaken(tenDangNhap)) return false;
         using var con = Db.CreateConnection();
         con.Open();
         using var cmd = new SqlCommand(
-            "INSERT INTO taikhoan (tendangnhap, matkhau) VALUES (@u, @p)", con);
+            "INSERT INTO taikhoan (tendangnhap, matkhau, vaitro) VALUES (@u, @p, @v)", con);
         cmd.Parameters.AddWithValue("@u", tenDangNhap);
         cmd.Parameters.AddWithValue("@p", Hash(matKhau));
+        cmd.Parameters.AddWithValue("@v", string.IsNullOrWhiteSpace(vaiTro) ? "User" : vaiTro);
         cmd.ExecuteNonQuery();
         return true;
     }
@@ -53,7 +60,7 @@ public class AccountService : IAccountService
         var list = new List<TaiKhoan>();
         using var con = Db.CreateConnection();
         con.Open();
-        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau FROM taikhoan", con);
+        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau, vaitro FROM taikhoan", con);
         using var rd = cmd.ExecuteReader();
         while (rd.Read()) list.Add(Map(rd));
         return list;
@@ -63,7 +70,7 @@ public class AccountService : IAccountService
     {
         using var con = Db.CreateConnection();
         con.Open();
-        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau FROM taikhoan WHERE id=@id", con);
+        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau, vaitro FROM taikhoan WHERE id=@id", con);
         cmd.Parameters.AddWithValue("@id", id);
         using var rd = cmd.ExecuteReader();
         return rd.Read() ? Map(rd) : null;
@@ -73,7 +80,7 @@ public class AccountService : IAccountService
     {
         using var con = Db.CreateConnection();
         con.Open();
-        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau FROM taikhoan WHERE tendangnhap=@u", con);
+        using var cmd = new SqlCommand("SELECT id, tendangnhap, matkhau, vaitro FROM taikhoan WHERE tendangnhap=@u", con);
         cmd.Parameters.AddWithValue("@u", tenDangNhap);
         using var rd = cmd.ExecuteReader();
         return rd.Read() ? Map(rd) : null;
@@ -86,16 +93,18 @@ public class AccountService : IAccountService
         if (!string.IsNullOrEmpty(newMatKhau))
         {
             using var cmd = new SqlCommand(
-                "UPDATE taikhoan SET tendangnhap=@u, matkhau=@p WHERE id=@id", con);
+                "UPDATE taikhoan SET tendangnhap=@u, matkhau=@p, vaitro=@v WHERE id=@id", con);
             cmd.Parameters.AddWithValue("@u", tk.TenDangNhap);
             cmd.Parameters.AddWithValue("@p", Hash(newMatKhau));
+            cmd.Parameters.AddWithValue("@v", tk.VaiTro);
             cmd.Parameters.AddWithValue("@id", tk.Id);
             cmd.ExecuteNonQuery();
         }
         else
         {
-            using var cmd = new SqlCommand("UPDATE taikhoan SET tendangnhap=@u WHERE id=@id", con);
+            using var cmd = new SqlCommand("UPDATE taikhoan SET tendangnhap=@u, vaitro=@v WHERE id=@id", con);
             cmd.Parameters.AddWithValue("@u", tk.TenDangNhap);
+            cmd.Parameters.AddWithValue("@v", tk.VaiTro);
             cmd.Parameters.AddWithValue("@id", tk.Id);
             cmd.ExecuteNonQuery();
         }
@@ -124,6 +133,7 @@ public class AccountService : IAccountService
     {
         Id = (int)rd["id"],
         TenDangNhap = (string)rd["tendangnhap"],
-        MatKhau = rd["matkhau"] as string
+        MatKhau = rd["matkhau"] as string,
+        VaiTro = rd["vaitro"] as string ?? "User"
     };
 }

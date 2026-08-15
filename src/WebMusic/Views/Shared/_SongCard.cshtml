@@ -1,0 +1,25 @@
+@model BaiHat
+<div class="col">
+    <div class="card h-100 wm-song-card">
+        <div class="position-relative">
+            <a asp-controller="BaiHat" asp-action="Detail" asp-route-id="@Model.MaBaiHat">
+                <img src="~/images/baihat/@Model.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@Model.TenBaiHat" />
+            </a>
+            <div class="wm-card-overlay"></div>
+            @if (!string.IsNullOrEmpty(Model.LinkBaiHat))
+            {
+                <button type="button" class="btn wm-play-overlay rounded-circle"
+                        style="background:#1db954;border-color:#1db954;color:#fff"
+                        data-src="/audio/@Model.LinkBaiHat" data-title="@Model.TenBaiHat"
+                        data-cover="/images/baihat/@Model.HinhAnh" data-id="@Model.MaBaiHat"
+                        aria-label="Phát @Model.TenBaiHat"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+            }
+        </div>
+        <div class="card-body p-2">
+            <a class="text-decoration-none" style="color:#fff" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@Model.MaBaiHat">
+                <span class="fw-semibold small d-block text-truncate">@Model.TenBaiHat</span>
+            </a>
+            <small style="color:#b3b3b3" class="text-truncate d-block">@Model.TacGia</small>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@ using WebMusic.Services;
 namespace WebMusic.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class HomeController : Controller
 {
     private readonly ICaSiService _cs;
@@ -29,6 +29,10 @@ public class HomeController : Controller
         ViewBag.TheLoai = _tl.GetAll().Count;
         ViewBag.ChuDe = _cd.GetAll().Count;
         ViewBag.TaiKhoan = _acc.GetAll().Count;
+
+        var top = _bh.GetTop(5);
+        ViewBag.TopTitles = top.Select(b => b.TenBaiHat).ToArray();
+        ViewBag.TopViews = top.Select(b => b.LuotNghe).ToArray();
         return View();
     }
 }

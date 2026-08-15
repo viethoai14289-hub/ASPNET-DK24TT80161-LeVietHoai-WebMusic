@@ -11,4 +11,6 @@ public class BaiHat
     public int MaAlbum { get; set; }
     public int MaChuDe { get; set; }
     public string? LinkBaiHat { get; set; }
+    public int LuotNghe { get; set; }
+    public int Duration { get; set; }
 }

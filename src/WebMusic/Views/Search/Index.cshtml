@@ -3,127 +3,130 @@
     ViewData["Title"] = "Tìm kiếm";
 }
 
-<h1 class="h3 mb-4">Kết quả tìm kiếm: "@Model.Query"</h1>
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>Tìm: "@Model.Query"</h1>
+    </div>
+</div>
 
-@if (string.IsNullOrWhiteSpace(Model.Query))
-{
-    <p class="text-muted">Nhập từ khóa vào ô tìm kiếm.</p>
-    return;
-}
+<div class="container">
+    @if (string.IsNullOrWhiteSpace(Model.Query))
+    {
+        <p style="color:#b3b3b3" class="text-center">Nhập từ khóa vào ô tìm kiếm.</p>
+        return;
+    }
 
-@if (Model.BaiHats.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Bài hát</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var bh in Model.BaiHats)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
-                        <img src="~/images/baihat/@bh.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@bh.TenBaiHat" />
-                        <div class="card-body p-2">
-                            <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
-                            <small class="text-muted">@bh.TacGia</small>
-                        </div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.BaiHats.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Bài hát</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var bh in Model.BaiHats)
+                {
+                    @await Html.PartialAsync("_SongCard", bh)
+                }
+            </div>
+        </section>
+    }
 
-@if (Model.CaSis.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Ca sĩ</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var cs in Model.CaSis)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
-                        <img src="~/images/casi/@cs.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cs.TenCaSi" />
-                        <div class="card-body p-2"><span class="fw-semibold small">@cs.TenCaSi</span></div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.CaSis.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Ca sĩ</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var cs in Model.CaSis)
+                {
+                    <div class="col">
+                        <a class="musico-gallery-item text-decoration-none" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
+                            <img src="~/images/casi/@cs.HinhAnh" alt="@cs.TenCaSi" style="border-radius:50%" />
+                            <div class="musico-gallery-overlay" style="border-radius:50%"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                            <div class="musico-gallery-caption text-center" style="background:none"><h6>@cs.TenCaSi</h6></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </section>
+    }
 
-@if (Model.Albums.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Album</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var ab in Model.Albums)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
-                        <img src="~/images/album/@ab.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@ab.TenAlbum" />
-                        <div class="card-body p-2"><span class="fw-semibold small">@ab.TenAlbum</span></div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.Albums.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Album</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var ab in Model.Albums)
+                {
+                    <div class="col">
+                        <a class="musico-gallery-item text-decoration-none" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
+                            <img src="~/images/album/@ab.HinhAnh" alt="@ab.TenAlbum" />
+                            <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                            <div class="musico-gallery-caption"><h6>@ab.TenAlbum</h6></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </section>
+    }
 
-@if (Model.Playlists.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Playlist</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var pl in Model.Playlists)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
-                        <img src="~/images/playlist/@pl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@pl.TenPlayList" />
-                        <div class="card-body p-2"><span class="fw-semibold small">@pl.TenPlayList</span></div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.Playlists.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Playlist</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var pl in Model.Playlists)
+                {
+                    <div class="col">
+                        <a class="musico-gallery-item text-decoration-none" asp-controller="Playlist" asp-action="Detail" asp-route-id="@pl.MaPlayList">
+                            <img src="~/images/playlist/@pl.HinhAnh" alt="@pl.TenPlayList" />
+                            <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                            <div class="musico-gallery-caption"><h6 class="text-truncate">@pl.TenPlayList</h6></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </section>
+    }
 
-@if (Model.TheLoais.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Thể loại</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var tl in Model.TheLoais)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
-                        <img src="~/images/theloai/@tl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@tl.TenTheLoai" />
-                        <div class="card-body p-2"><span class="fw-semibold small">@tl.TenTheLoai</span></div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.TheLoais.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Thể loại</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var tl in Model.TheLoais)
+                {
+                    <div class="col">
+                        <a class="musico-gallery-item text-decoration-none" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
+                            <img src="~/images/theloai/@tl.HinhAnh" alt="@tl.TenTheLoai" />
+                            <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                            <div class="musico-gallery-caption"><h6>@tl.TenTheLoai</h6></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </section>
+    }
 
-@if (Model.ChuDes.Any())
-{
-    <section class="mb-4">
-        <h2 class="h4 mb-3 border-start border-success ps-2">Chủ đề</h2>
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            @foreach (var cd in Model.ChuDes)
-            {
-                <div class="col">
-                    <a class="card h-100 text-decoration-none text-body" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
-                        <img src="~/images/chude/@cd.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cd.TenChuDe" />
-                        <div class="card-body p-2"><span class="fw-semibold small">@cd.TenChuDe</span></div>
-                    </a>
-                </div>
-            }
-        </div>
-    </section>
-}
+    @if (Model.ChuDes.Any())
+    {
+        <section class="mb-4">
+            <h2 class="musico-section-title">Chủ đề</h2>
+            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                @foreach (var cd in Model.ChuDes)
+                {
+                    <div class="col">
+                        <a class="musico-gallery-item text-decoration-none" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
+                            <img src="~/images/chude/@cd.HinhAnh" alt="@cd.TenChuDe" />
+                            <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                            <div class="musico-gallery-caption"><h6>@cd.TenChuDe</h6></div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </section>
+    }
 
-@if (!Model.BaiHats.Any() && !Model.CaSis.Any() && !Model.Albums.Any()
-   && !Model.Playlists.Any() && !Model.TheLoais.Any() && !Model.ChuDes.Any())
-{
-    <p class="text-muted">Không tìm thấy kết quả nào.</p>
-}
+    @if (!Model.BaiHats.Any() && !Model.CaSis.Any() && !Model.Albums.Any()
+       && !Model.Playlists.Any() && !Model.TheLoais.Any() && !Model.ChuDes.Any())
+    {
+        <p style="color:#b3b3b3" class="text-center">Không tìm thấy kết quả nào.</p>
+    }
+</div>

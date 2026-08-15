@@ -3,91 +3,130 @@
     ViewData["Title"] = "Trang chủ";
 }
 
-<!-- Slideshow -->
-<div id="heroCarousel" class="carousel slide mb-4 rounded overflow-hidden" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<div class="musico-slider">
+    <div class="container">
+        <h3>NCT</h3>
+        <p>Khám phá hàng ngàn bài hát, ca sĩ, album và playlist Việt Nam.</p>
     </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active ratio ratio-21x9">
-            <img src="~/images/slideshow/pic1.jpg" class="object-fit-cover" alt="slide 1" />
-        </div>
-        <div class="carousel-item ratio ratio-21x9">
-            <img src="~/images/slideshow/pic2.jpg" class="object-fit-cover" alt="slide 2" />
-        </div>
-        <div class="carousel-item ratio ratio-21x9">
-            <img src="~/images/slideshow/pic3.jpg" class="object-fit-cover" alt="slide 3" />
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Slide trước">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Slide sau">
-        <span class="carousel-control-next-icon"></span>
-    </button>
 </div>
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Thể loại</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var tl in Model.TheLoais)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
-                    <img src="~/images/theloai/@tl.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@tl.TenTheLoai" />
-                    <div class="card-body p-2"><span class="fw-semibold small">@tl.TenTheLoai</span></div>
-                </a>
+<div class="container">
+    <div class="row g-4 mb-4">
+        <div class="col-lg-5">
+            <div class="card h-100">
+                <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                    <h2 class="h6 mb-0" style="font-family:'Josefin Sans';color:#fff">Bảng xếp hạng</h2>
+                    <a class="small text-decoration-none" style="color:#1db954" asp-controller="BaiHat" asp-action="Top">Xem tất cả →</a>
+                </div>
+                <div class="card-body">
+                    @for (var i = 0; i < Model.TopBaiHats.Count; i++)
+                    {
+                        var bh = Model.TopBaiHats[i];
+                        <div class="wm-rank">
+                            <span class="wm-rank-num">@(i + 1)</span>
+                            <img src="~/images/baihat/@bh.HinhAnh" alt="@bh.TenBaiHat" class="wm-cover-sm rounded flex-shrink-0" />
+                            <a class="text-decoration-none flex-grow-1 text-truncate" style="color:#fff" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
+                                <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
+                                <small style="color:#b3b3b3" class="text-truncate d-block">@bh.TacGia</small>
+                            </a>
+                            @if (!string.IsNullOrEmpty(bh.LinkBaiHat))
+                            {
+                                <button type="button" class="btn btn-sm wm-btn-play-sm wm-play-overlay-static rounded-circle flex-shrink-0"
+                                        style="background:#1db954;border-color:#1db954;color:#fff"
+                                        data-src="/audio/@bh.LinkBaiHat" data-title="@bh.TenBaiHat"
+                                        data-cover="/images/baihat/@bh.HinhAnh" data-id="@bh.MaBaiHat"
+                                        aria-label="Phát @bh.TenBaiHat"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5.5 3.5v9l7-4.5z"/></svg></button>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
-        }
-    </div>
-</section>
+        </div>
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Chủ đề</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var cd in Model.ChuDes)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
-                    <img src="~/images/chude/@cd.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@cd.TenChuDe" />
-                    <div class="card-body p-2"><span class="fw-semibold small">@cd.TenChuDe</span></div>
-                </a>
-            </div>
-        }
-    </div>
-</section>
-
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Album</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var ab in Model.Albums)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
-                    <img src="~/images/album/@ab.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@ab.TenAlbum" />
-                    <div class="card-body p-2"><span class="fw-semibold small">@ab.TenAlbum</span></div>
-                </a>
-            </div>
-        }
-    </div>
-</section>
-
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Bài hát</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var bh in Model.BaiHats)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
-                    <img src="~/images/baihat/@bh.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@bh.TenBaiHat" />
-                    <div class="card-body p-2">
-                        <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
-                        <small class="text-muted">@bh.TacGia</small>
+        <div class="col-lg-7">
+            <div class="card h-100">
+                <div class="card-header bg-transparent">
+                    <h2 class="h6 mb-0" style="font-family:'Josefin Sans';color:#fff">Ca sĩ nổi bật</h2>
+                </div>
+                <div class="card-body">
+                    <div class="wm-scroll-row">
+                        @foreach (var cs in Model.CaSis)
+                        {
+                            <div class="col">
+                                <a class="text-decoration-none text-center d-block" asp-controller="CaSi" asp-action="Detail" asp-route-id="@cs.MaCaSi">
+                                    <img src="~/images/casi/@cs.HinhAnh" alt="@cs.TenCaSi" class="wm-cover-artist rounded-circle mx-auto d-block" />
+                                    <span class="fw-semibold small d-block mt-2 text-truncate" style="color:#fff">@cs.TenCaSi</span>
+                                </a>
+                            </div>
+                        }
                     </div>
-                </a>
+                </div>
             </div>
-        }
+        </div>
     </div>
-</section>
+
+    <section class="mb-4">
+        <h2 class="musico-section-title">Album nổi bật</h2>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-3">
+            @foreach (var ab in Model.Albums)
+            {
+                <div class="col">
+                    <a class="musico-gallery-item text-decoration-none" asp-controller="Album" asp-action="Detail" asp-route-id="@ab.MaAlbum">
+                        <img src="~/images/album/@ab.HinhAnh" alt="@ab.TenAlbum" />
+                        <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                        <div class="musico-gallery-caption"><h6>@ab.TenAlbum</h6></div>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h2 class="musico-section-title">Thể loại</h2>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+            @foreach (var tl in Model.TheLoais)
+            {
+                <div class="col">
+                    <a class="musico-gallery-item text-decoration-none" asp-controller="TheLoai" asp-action="Index" asp-route-id="@tl.MaTheLoai">
+                        <img src="~/images/theloai/@tl.HinhAnh" alt="@tl.TenTheLoai" />
+                        <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                        <div class="musico-gallery-caption"><h6>@tl.TenTheLoai</h6></div>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h2 class="musico-section-title">Chủ đề</h2>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+            @foreach (var cd in Model.ChuDes)
+            {
+                <div class="col">
+                    <a class="musico-gallery-item text-decoration-none" asp-controller="ChuDe" asp-action="Detail" asp-route-id="@cd.MaChuDe">
+                        <img src="~/images/chude/@cd.HinhAnh" alt="@cd.TenChuDe" />
+                        <div class="musico-gallery-overlay"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0z"/></svg></div>
+                        <div class="musico-gallery-caption"><h6>@cd.TenChuDe</h6></div>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="mb-4">
+        <h2 class="musico-section-title">Bài hát</h2>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+            @foreach (var bh in Model.BaiHats)
+            {
+                @await Html.PartialAsync("_SongCard", bh)
+            }
+        </div>
+    </section>
+
+    <div class="musico-cta">
+        <div class="container">
+            <h3>Khám phá Top thịnh hành</h3>
+            <a class="boxed-btn" style="background:#1db954;color:#fff;border-color:#1db954" asp-controller="BaiHat" asp-action="Top">Xem bảng xếp hạng</a>
+        </div>
+    </div>
+</div>

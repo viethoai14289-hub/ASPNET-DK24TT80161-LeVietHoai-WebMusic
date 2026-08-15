@@ -9,9 +9,9 @@
 <h1 class="h3 mb-3">Sửa bài hát</h1>
 @if (!string.IsNullOrEmpty(Model.HinhAnh))
 {
-    <img src="~/images/baihat/@Model.HinhAnh" alt="" class="rounded mb-3" style="width:96px;height:96px;object-fit:cover" />
+    <img src="~/images/baihat/@Model.HinhAnh" alt="" class="rounded mb-3 wm-cover-md" />
 }
-<div class="card" style="max-width:640px">
+<div class="card wm-card-form">
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
@@ -31,6 +31,10 @@
             <div class="mb-3">
                 <label class="form-label">Link bài hát (tên file mp3)</label>
                 <input asp-for="LinkBaiHat" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Thời lượng (giây)</label>
+                <input asp-for="Duration" type="number" min="0" class="form-control" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Thể loại</label>

@@ -9,7 +9,6 @@ public class TheLoaiController : Controller
     private readonly ITheLoaiService _sv;
     public TheLoaiController(ITheLoaiService sv) => _sv = sv;
 
-    // Index(int? id): list theloai; nếu có id -> filter playlist theo theloai
     public IActionResult Index(int? id)
     {
         var vm = new TheLoaiVM { TheLoais = _sv.GetAll(), SelectedId = id };

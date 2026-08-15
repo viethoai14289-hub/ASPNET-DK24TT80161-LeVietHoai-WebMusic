@@ -14,9 +14,9 @@
             {
                 <tr>
                     <td>@cd.MaChuDe</td>
-                    <td><img src="~/images/chude/@cd.HinhAnh" alt="" class="rounded" style="width:48px;height:48px;object-fit:cover" /></td>
+                    <td><img src="~/images/chude/@cd.HinhAnh" alt="" class="rounded wm-cover-xs" /></td>
                     <td>@cd.TenChuDe</td>
-                    <td class="d-block text-truncate" style="max-width:240px">@(cd.MoTaThem ?? "")</td>
+                    <td class="d-block text-truncate wm-td-truncate">@(cd.MoTaThem ?? "")</td>
                     <td>
                         <div class="d-flex gap-2 align-items-center">
                             <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@cd.MaChuDe">Sửa</a>

@@ -34,7 +34,13 @@ public class AccountController : Controller
             return View();
         }
 
-        var claims = new List<Claim> { new(ClaimTypes.Name, tenDangNhap) };
+        var tk = _acc.GetByTenDangNhap(tenDangNhap);
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, tenDangNhap),
+            new(ClaimTypes.NameIdentifier, tk?.Id.ToString() ?? "0"),
+            new(ClaimTypes.Role, tk?.VaiTro ?? "User")
+        };
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var props = new AuthenticationProperties
         {
@@ -47,7 +53,10 @@ public class AccountController : Controller
             props);
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
-        return RedirectToAction("Index", "Home", new { area = "Admin" });
+        var role = tk?.VaiTro ?? "User";
+        return role == "Admin"
+            ? RedirectToAction("Index", "Home", new { area = "Admin" })
+            : RedirectToAction("Index", "Home");
     }
 
     [HttpGet]

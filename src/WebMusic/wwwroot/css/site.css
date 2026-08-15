@@ -1,0 +1,139 @@
+:root[data-bs-theme="dark"] {
+    --bs-primary: #1db954;
+    --bs-primary-rgb: 29, 185, 84;
+    --bs-body-bg: #121212;
+    --bs-body-color: #fff;
+    --bs-tertiary-bg: #1a1a1a;
+    --bs-secondary-bg: #282828;
+    --bs-border-color: #2a2a2a;
+    --bs-card-bg: #181818;
+    --bs-emphasis-color: #fff;
+    --bs-link-color: #1db954;
+    --bs-link-hover-color: #1ed760;
+    --bs-heading-color: #fff;
+}
+
+body { font-family: "Muli", system-ui, sans-serif; color: #fff; }
+h1, h2, h3, h4, h5, h6, .navbar-brand, .musico-footer-title, .musico-section-title { font-family: "Josefin Sans", system-ui, sans-serif; }
+
+.musico-header { background: #121212; border-bottom: 1px solid #1a1a1a; }
+.musico-header .navbar-brand img { height: 36px; }
+.musico-nav .nav-link { color: #fff !important; font-family: "Josefin Sans", sans-serif; text-transform: capitalize; font-size: 15px; padding: 8px 12px !important; transition: color .3s; }
+.musico-nav .nav-link:hover, .musico-nav .nav-link.active { color: #1db954 !important; }
+.musico-social a { display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; border: 1px solid #2a2a2a; border-radius: 50%; color: #fff; transition: all .3s; }
+.musico-social a:hover { background: #1db954; border-color: #1db954; }
+.musico-header .form-control { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+.musico-header .form-control::placeholder { color: #b3b3b3; }
+.musico-header .form-control:focus { background: #1a1a1a; border-color: #1db954; color: #fff; box-shadow: 0 0 0 .2rem rgba(29,185,84,.25); }
+
+.wm-btn-outline { border: 1px solid #2a2a2a; color: #fff; background: transparent; border-radius: 999px; padding: 6px 18px; font-family: "Josefin Sans", sans-serif; font-size: 14px; transition: all .3s; }
+.wm-btn-outline:hover { border-color: #1db954; color: #1db954; }
+.wm-user-menu { white-space: nowrap; }
+.wm-user-toggle { background: transparent; border: 1px solid #2a2a2a; border-radius: 999px; padding: 4px 14px 4px 4px; color: #fff; transition: all .3s; }
+.wm-user-toggle:hover, .wm-user-toggle[aria-expanded="true"] { border-color: #1db954; }
+.wm-user-avatar { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #1db954; color: #121212; font-family: "Josefin Sans", sans-serif; font-weight: 700; font-size: 14px; }
+.wm-user-name { color: #fff; font-family: "Josefin Sans", sans-serif; }
+.wm-user-dropdown { background: #181818; border: 1px solid #2a2a2a; border-radius: .5rem; padding: .5rem 0; min-width: 200px; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.wm-user-dropdown .dropdown-header { color: #b3b3b3; font-family: "Josefin Sans", sans-serif; font-size: 13px; padding: .5rem 1rem; }
+.wm-user-dropdown .dropdown-item { color: #fff; padding: .5rem 1rem; font-size: 14px; }
+.wm-user-dropdown .dropdown-item:hover { background: #1a1a1a; color: #1db954; }
+.wm-user-dropdown .dropdown-divider { border-color: #2a2a2a; }
+@media (max-width: 991px) { .wm-search { width: 100%; margin-top: .5rem; } }
+
+.musico-slider { position: relative; min-height: 480px; display: flex; align-items: center; background: url("../images/slideshow/pic1.jpg") center/cover; margin-bottom: 2rem; }
+.musico-slider::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.4), #121212); }
+.musico-slider > .container { position: relative; z-index: 1; }
+.musico-slider h3 { font-size: 3.5rem; font-weight: 600; text-transform: uppercase; color: #fff; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.musico-slider p { color: #b3b3b3; font-size: 1.1rem; }
+@media (max-width: 767px) { .musico-slider { min-height: 300px; } .musico-slider h3 { font-size: 2rem; } }
+
+.musico-bradcam { position: relative; min-height: 260px; display: flex; align-items: center; margin-bottom: 2rem; background: url("../images/slideshow/pic2.jpg") center/cover; }
+.musico-bradcam::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(29,185,84,.6), rgba(0,0,0,.85)); }
+.musico-bradcam > .container { position: relative; z-index: 1; }
+.musico-bradcam h1 { font-size: 2.5rem; font-weight: 600; text-transform: uppercase; color: #fff; margin: 0; }
+
+.musico-section-title { font-size: 2rem; font-weight: 600; color: #fff; text-align: center; margin-bottom: 2rem; position: relative; padding-bottom: .75rem; }
+.musico-section-title::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 70px; height: 3px; background: #1db954; }
+
+.boxed-btn { display: inline-block; padding: 12px 36px; font-family: "Josefin Sans", sans-serif; font-size: 15px; font-weight: 600; text-transform: capitalize; color: #1db954; background: transparent; border: 1px solid #1db954; border-radius: 0; transition: all .4s; text-decoration: none; }
+.boxed-btn:hover { background: #1db954; color: #fff !important; }
+.wm-btn { border: 1px solid #1db954; color: #1db954; background: transparent; transition: all .3s; border-radius: 0; }
+.wm-btn:hover { background: #1db954; color: #fff; }
+
+.musico-track { display: flex; align-items: center; gap: 1.25rem; padding: .75rem 1rem; border-radius: .5rem; transition: background .25s, box-shadow .25s; border-left: 3px solid transparent; }
+.musico-track:hover { background: #1a1a1a; border-left-color: #1db954; }
+.musico-track .thumb { flex-shrink: 0; }
+.musico-track .thumb img { width: 72px; height: 72px; object-fit: cover; border-radius: .375rem; box-shadow: 0 3px 10px rgba(0,0,0,.4); }
+.musico-track .track-info { flex: 1; min-width: 0; }
+.musico-track .track-info h4 { font-size: 1.15rem; font-weight: 600; color: #fff; margin: 0; }
+.musico-track .track-info p { font-size: .85rem; color: #b3b3b3; margin: 0; }
+.musico-track .track-rank { font-family: "Josefin Sans", sans-serif; font-size: 1.75rem; font-weight: 700; color: #1db954; width: 2.5rem; text-align: center; flex-shrink: 0; }
+
+.musico-gallery-item { position: relative; overflow: hidden; border-radius: .5rem; display: block; }
+.musico-gallery-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: transform .5s; }
+.musico-gallery-item:hover img { transform: scale(1.06); }
+.musico-gallery-overlay { position: absolute; inset: 0; background: rgba(29,185,84,.5); opacity: 0; transition: opacity .35s; display: flex; align-items: center; justify-content: center; }
+.musico-gallery-item:hover .musico-gallery-overlay { opacity: 1; }
+.musico-gallery-overlay svg { color: #fff; width: 36px; height: 36px; }
+.musico-gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: .75rem; background: linear-gradient(transparent, rgba(0,0,0,.85)); }
+.musico-gallery-caption h6 { color: #fff; margin: 0; font-weight: 600; }
+.musico-gallery-caption small { color: #b3b3b3; }
+
+.musico-about { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; margin-bottom: 2rem; }
+.musico-about .about-thumb { flex: 0 0 auto; }
+.musico-about .about-thumb img { width: 280px; height: 280px; object-fit: cover; border-radius: .5rem; box-shadow: 0 5px 20px rgba(0,0,0,.4); }
+.musico-about .about-info { flex: 1; min-width: 260px; }
+.musico-about .about-info h3 { font-size: 2.5rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+.musico-about .about-info p { color: #b3b3b3; line-height: 1.8; }
+
+.musico-footer { background: #121212; border-top: 3px solid #1db954; padding-top: 3rem; padding-bottom: 1.5rem; margin-top: auto; }
+.musico-footer-title { font-family: "Josefin Sans", sans-serif; font-size: 1.3rem; color: #fff; margin-bottom: 1.25rem; text-transform: capitalize; }
+.musico-footer p, .musico-footer li { color: #b3b3b3; }
+.musico-footer a { color: #b3b3b3; text-decoration: none; }
+.musico-footer a:hover { color: #1db954; }
+.musico-footer .musico-social a { border-color: #2a2a2a; }
+.musico-footer .copy-right { border-top: 1px solid #1a1a1a; padding-top: 1rem; margin-top: 2rem; color: #b3b3b3; font-size: .85rem; }
+
+.card { background: var(--bs-card-bg); border-color: var(--bs-border-color); transition: transform .15s, box-shadow .15s, border-color .15s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.4); border-color: #1db954 !important; }
+
+/* play overlay: player.js đọc data-src/title/cover/id trên .wm-play-overlay */
+.wm-song-card { position: relative; }
+.wm-song-card .wm-card-overlay { position: absolute; inset: 0; background: rgba(29,185,84,.45); opacity: 0; transition: opacity .2s; border-radius: .25rem .25rem 0 0; }
+.wm-song-card:hover .wm-card-overlay { opacity: 1; }
+.wm-song-card .wm-play-overlay { position: absolute; right: .5rem; bottom: .5rem; width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(.25rem); transition: opacity .15s, transform .15s; z-index: 2; }
+.wm-song-card:hover .wm-play-overlay { opacity: 1; transform: translateY(0); }
+.wm-btn-play-sm { width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
+.wm-btn-play-md { width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; }
+
+.wm-cover-xs { width: 40px; height: 40px; object-fit: cover; }
+.wm-cover-sm { width: 56px; height: 56px; object-fit: cover; }
+.wm-cover-md { width: 96px; height: 96px; object-fit: cover; }
+.wm-cover-lg { width: 220px; height: 220px; object-fit: cover; }
+.wm-cover-artist { width: 140px; height: 140px; object-fit: cover; }
+.wm-flex-min { flex-grow: 1; min-width: 240px; }
+.wm-audio { max-width: 500px; }
+.wm-pre-wrap { white-space: pre-wrap; }
+.wm-pre-line { white-space: pre-line; }
+.wm-card-auth { max-width: 460px; }
+.wm-scroll-row { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 1rem; padding-bottom: .5rem; }
+.wm-scroll-row > .col { flex: 0 0 auto; width: 150px; }
+.wm-scroll-row::-webkit-scrollbar { height: 6px; }
+.wm-scroll-row::-webkit-scrollbar-thumb { background: #1db95455; border-radius: 3px; }
+.wm-rank { display: flex; align-items: center; gap: .75rem; padding: .5rem 0; border-bottom: 1px solid #1a1a1a; }
+.wm-rank-num { font-family: "Josefin Sans", sans-serif; font-size: 1.5rem; font-weight: 700; color: #1db954; width: 2rem; text-align: center; flex-shrink: 0; }
+.wm-rank:hover { background: #1a1a1a; }
+.wm-td-truncate { max-width: 240px; }
+
+#wmPlayer { z-index: 1030; background: #121212 !important; border-top: 2px solid #1db954 !important; }
+.wm-player-cover { width: 44px; height: 44px; object-fit: cover; border-radius: .25rem; }
+.wm-player-info { min-width: 120px; }
+.wm-player-audio { height: 36px; }
+
+.wm-play-bar { flex: 1; min-width: 80px; max-width: 160px; height: 6px; background: #1a1a1a; border-radius: 3px; overflow: hidden; }
+.wm-play-bar > span { display: block; height: 100%; background: #1db954; border-radius: 3px; }
+
+.musico-cta { position: relative; min-height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 2.5rem 0; background: linear-gradient(135deg, rgba(29,185,84,.85), rgba(0,0,0,.85)), url("../images/slideshow/pic3.jpg") center/cover; border-radius: .5rem; overflow: hidden; }
+.musico-cta h3 { font-family: "Josefin Sans", sans-serif; font-size: 2.2rem; font-weight: 600; color: #fff; margin-bottom: 1rem; }
+
+.wm-lyrics { border-left: 4px solid #1db954; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #181818; color: #b3b3b3; font-style: italic; line-height: 1.9; white-space: pre-line; border-radius: 0 .5rem .5rem 0; }

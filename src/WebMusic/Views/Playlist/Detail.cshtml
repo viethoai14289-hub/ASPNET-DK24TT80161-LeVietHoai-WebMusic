@@ -4,28 +4,37 @@
     var baiHats = ViewBag.BaiHats as List<BaiHat> ?? new();
 }
 
-<div class="d-flex flex-wrap gap-4 mb-4">
-    <img class="rounded" style="width:220px;height:220px;object-fit:cover" src="~/images/playlist/@Model.HinhAnh" alt="@Model.TenPlayList" />
-    <div class="flex-grow-1" style="min-width:240px">
-        <h1 class="h2">@Model.TenPlayList</h1>
-        <p class="text-muted">Người tạo: @Model.NguoiTao</p>
+<div class="musico-bradcam">
+    <div class="container">
+        <h1>@Model.TenPlayList</h1>
     </div>
 </div>
 
-<section class="mb-4">
-    <h2 class="h4 mb-3 border-start border-success ps-2">Bài hát trong playlist</h2>
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-        @foreach (var bh in baiHats)
-        {
-            <div class="col">
-                <a class="card h-100 text-decoration-none text-body" asp-controller="BaiHat" asp-action="Detail" asp-route-id="@bh.MaBaiHat">
-                    <img src="~/images/baihat/@bh.HinhAnh" class="card-img-top ratio ratio-1x1 object-fit-cover" alt="@bh.TenBaiHat" />
-                    <div class="card-body p-2">
-                        <span class="fw-semibold small d-block text-truncate">@bh.TenBaiHat</span>
-                        <small class="text-muted">@bh.TacGia</small>
-                    </div>
-                </a>
-            </div>
-        }
+<div class="container">
+    <div class="musico-about mb-4">
+        <div class="about-thumb">
+            <img src="~/images/playlist/@Model.HinhAnh" alt="@Model.TenPlayList" class="wm-cover-lg" style="width:280px;height:280px" />
+        </div>
+        <div class="about-info">
+            <h3>@Model.TenPlayList</h3>
+            <p>Người tạo: @Model.NguoiTao</p>
+        </div>
     </div>
-</section>
+
+    <section class="mb-4">
+        <h2 class="musico-section-title">Bài hát trong playlist</h2>
+        @if (baiHats.Any())
+        {
+            <div class="card"><div class="card-body">
+                @foreach (var bh in baiHats)
+                {
+                    @await Html.PartialAsync("_TrackRow", bh)
+                }
+            </div></div>
+        }
+        else
+        {
+            <p style="color:#b3b3b3" class="text-center">Chưa có bài hát trong playlist này.</p>
+        }
+    </section>
+</div>

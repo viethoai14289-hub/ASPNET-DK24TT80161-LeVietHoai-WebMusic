@@ -62,7 +62,7 @@ public class SearchService : ISearchService
     private static void AddBaiHat(SqlConnection con, string q, SearchVM vm)
     {
         using var cmd = new SqlCommand(
-            "SELECT mabaihat, tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat " +
+            "SELECT mabaihat, tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat, luotnghe, duration " +
             "FROM baihat WHERE tenbaihat LIKE @q", con);
         cmd.Parameters.AddWithValue("@q", $"%{q}%");
         using var rd = cmd.ExecuteReader();

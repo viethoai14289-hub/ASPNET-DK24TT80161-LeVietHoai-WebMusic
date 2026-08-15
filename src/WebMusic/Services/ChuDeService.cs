@@ -80,7 +80,7 @@ public class ChuDeService : IChuDeService
         var list = new List<BaiHat>();
         using var con = Db.CreateConnection(); con.Open();
         using var cmd = new SqlCommand(
-            "SELECT mabaihat, tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat " +
+            "SELECT mabaihat, tenbaihat, hinhanh, loibaihat, tacgia, matheloai, maalbum, machude, linkbaihat, luotnghe, duration " +
             "FROM baihat WHERE machude=@id", con);
         cmd.Parameters.AddWithValue("@id", maChuDe);
         using var rd = cmd.ExecuteReader();

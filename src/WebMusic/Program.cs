@@ -5,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 Db.Configure(builder.Configuration);
 
-// DI: services (ADO.NET)
 builder.Services.AddScoped<WebMusic.Services.IAccountService, WebMusic.Services.AccountService>();
 builder.Services.AddScoped<WebMusic.Services.ITheLoaiService, WebMusic.Services.TheLoaiService>();
 builder.Services.AddScoped<WebMusic.Services.IChuDeService, WebMusic.Services.ChuDeService>();
@@ -14,6 +13,7 @@ builder.Services.AddScoped<WebMusic.Services.IBaiHatService, WebMusic.Services.B
 builder.Services.AddScoped<WebMusic.Services.ICaSiService, WebMusic.Services.CaSiService>();
 builder.Services.AddScoped<WebMusic.Services.IPlaylistService, WebMusic.Services.PlaylistService>();
 builder.Services.AddScoped<WebMusic.Services.ISearchService, WebMusic.Services.SearchService>();
+builder.Services.AddScoped<WebMusic.Services.IYeuThichService, WebMusic.Services.YeuThichService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddAntiforgery(o => o.HeaderName = "X-CSRF-TOKEN");
