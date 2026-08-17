@@ -17,7 +17,7 @@
 * Kiểm thử đăng nhập/đăng ký, thêm/sửa/xóa, phát nhạc trên nhiều trình duyệt.
 * Khắc phục các lỗi phát sinh trong quá trình kiểm thử.
 * Hoàn thiện nội dung báo cáo đồ án và tài liệu hướng dẫn cài đặt (README).
-* Chuẩn bị script cơ sở dữ liệu (setup/csdl.sql) và các báo cáo tiến độ.
+* Chuẩn bị script cơ sở dữ liệu (setup/nhaccuatui.sql) và các báo cáo tiến độ.
 
 ## 3. KẾT QUẢ
 

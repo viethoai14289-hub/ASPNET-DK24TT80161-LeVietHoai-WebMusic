@@ -22,7 +22,7 @@
   * Phát nhạc trên nhiều trình duyệt.
 * Rà soát và khắc phục các lỗi phát sinh, kiểm tra khả năng tương thích trên các trình duyệt **Google Chrome, Mozilla Firefox** và **Microsoft Edge**.
 * Hoàn thiện báo cáo đồ án (thư mục **thesis/**) và sắp xếp lại mã nguồn (thư mục **src/**).
-* Chuẩn bị script cơ sở dữ liệu (**setup/csdl.sql**) và các báo cáo tiến độ (thư mục **progress-report/**).
+* Chuẩn bị script cơ sở dữ liệu (**setup/nhaccuatui.sql**) và các báo cáo tiến độ (thư mục **progress-report/**).
 
 ## 3. KẾT QUẢ
 

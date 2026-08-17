@@ -2,7 +2,7 @@
    CSDL: Nhaccuatui - Website nghe nhac truc tuyen (SQL Server)
    ASP.NET Core 8 MVC + ADO.NET. Ten bang & cot khup voi ma nguon src/WebMusic/.
    Mat khau luu trong cot matkhau nvarchar(100).
-   Cach dung: sqlcmd -S . -i setup/csdl.sql  (hoac mo SSMS -> chay toan bo).
+   Cach dung: sqlcmd -S . -i setup/nhaccuatui.sql  (hoac mo SSMS -> chay toan bo).
    ===================================================================== */
 
 USE master;

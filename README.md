@@ -114,7 +114,7 @@ webmusicASP/
 │   └── BaoCaoTuan6.txt
 │
 ├── setup/
-│   └── csdl.sql          # Script tạo cơ sở dữ liệu (bản ASP.NET Core 8)
+│   └── nhaccuatui.sql     # Script tạo cơ sở dữ liệu (bản ASP.NET Core 8)
 │
 ├── src/
 │   └── WebMusic/         # Mã nguồn ASP.NET Core 8 MVC
@@ -161,10 +161,10 @@ cd webmusicASP
 Chạy script tạo database + seed dữ liệu mẫu:
 
 ```bash
-sqlcmd -S . -i setup/csdl.sql
+sqlcmd -S . -i setup/nhaccuatui.sql
 ```
 
-Script `csdl.sql` tự động:
+Script `nhaccuatui.sql` tự động:
 
 * Drop + tạo lại DB `Nhaccuatui`.
 * Tạo 12 bảng + khóa ngoại (bảng trung gian + `yeuthich` có `ON DELETE CASCADE`).
@@ -201,7 +201,7 @@ Mở http://localhost:5258
 | Quản trị viên | `admin`   | `123`     |
 | Người dùng    | `huyen`   | `123456`  |
 
-Tài khoản trên đã được tạo sẵn trong `setup/csdl.sql`. Có thể tạo thêm tài khoản mới thông qua chức năng **Đăng ký**.
+Tài khoản trên đã được tạo sẵn trong `setup/nhaccuatui.sql`. Có thể tạo thêm tài khoản mới thông qua chức năng **Đăng ký**.
 
 ---
 

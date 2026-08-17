@@ -19,7 +19,7 @@
   * `casi_baihat`
   * `playlist_baihat`
 * Vẽ sơ đồ ERD và sơ đồ quan hệ (Database Diagram).
-* Viết script tạo cơ sở dữ liệu **"Nhaccuatui"** (`setup/csdl.sql`) trên SQL Server.
+* Viết script tạo cơ sở dữ liệu **"Nhaccuatui"** (`setup/nhaccuatui.sql`) trên SQL Server.
 * Xác định kiểu dữ liệu cho từng cột (nvarchar, int,...) và các cột cho phép giá trị `NULL`.
 
 ## 3. KẾT QUẢ
@@ -33,6 +33,6 @@
 
 ## 5. PHÂN CÔNG
 
-* **Lê Việt Hoài:** Thiết kế ERD, viết `csdl.sql`.
+* **Lê Việt Hoài:** Thiết kế ERD, viết `nhaccuatui.sql`.
 * **Lê Thị Nhàn:** Kiểm tra ràng buộc khóa ngoại, chuẩn bị dữ liệu mẫu.
 * **Đỗ Xuân Thủy:** Vẽ Database Diagram, mô tả từng bảng.
