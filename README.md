@@ -36,7 +36,7 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 * **Cơ sở dữ liệu:** Microsoft SQL Server
 * **Truy xuất dữ liệu:** ADO.NET (`Microsoft.Data.SqlClient`)
 * **Giao diện:** HTML5, CSS3, JavaScript + **Bootstrap 5.3.3** + **jQuery 3.7.1**
-* **Xác thực:** Custom cookie authentication + BCrypt hash mật khẩu
+* **Xác thực:** Custom cookie authentication
 * **Quy trình phát triển:** Waterfall
 * **Công cụ phát triển:** Visual Studio, SQL Server Management Studio (SSMS), Git, GitHub
 
@@ -61,7 +61,7 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 * Lọc danh sách theo thể loại.
 * Nghe nhạc theo Playlist.
 * Tìm kiếm theo 1 từ khóa (`q`), tìm trên 6 thực thể, chỉ hiển thị mục có kết quả.
-* Đăng nhập / Đăng ký tài khoản (cookie auth, BCrypt, validate phía server).
+* Đăng nhập / Đăng ký tài khoản (cookie auth, validate phía server).
 * **Yêu thích bài hát** (❤️) + trang **"Nhạc của tôi"** (`/YeuThich/MyMusic`) cho thành viên đăng nhập.
 
 ## Quản trị viên (Admin, area `/Admin`)
@@ -72,7 +72,7 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 * Đăng nhập và đăng ký tài khoản quản trị.
 * Quản lý (Thêm / Sửa / Xóa) đầy đủ cho **10 thực thể**:
   * Bài hát, Ca sĩ, Album, Thể loại, Chủ đề, Playlist
-  * 3 bảng junction: Ca sĩ – Bài hát, Ca sĩ – Album, Playlist – Bài hát
+  * 3 bảng trung gian (nhiều-nhiều): Ca sĩ – Bài hát, Ca sĩ – Album, Playlist – Bài hát
   * Tài khoản (chọn vai trò khi tạo/sửa)
 * Tải lên hình ảnh qua `IFormFile` vào `wwwroot/images/<entity>/`.
 * Antiforgery token trên mọi form POST, hộp thoại xác nhận khi xóa.
@@ -95,7 +95,6 @@ Mỗi service là một lớp injected qua DI, dùng `SqlConnection` + `SqlComma
 | Data access       | ADO.NET (`Microsoft.Data.SqlClient`)       |
 | DB                | SQL Server                                 |
 | Auth              | Custom cookie authentication               |
-| Hash mật khẩu     | BCrypt.Net-Next                            |
 | Views             | Razor + Tag Helpers                        |
 | CSS/JS            | Bootstrap 5.3.3 + jQuery 3.7.1 (CDN)       |
 | UI/UX             | Dark theme (FE, `data-bs-theme=dark`) + light (Admin) |
@@ -168,9 +167,9 @@ sqlcmd -S . -i setup/csdl.sql
 Script `csdl.sql` tự động:
 
 * Drop + tạo lại DB `Nhaccuatui`.
-* Tạo 12 bảng + khóa ngoại (junction + `yeuthich` có `ON DELETE CASCADE`).
+* Tạo 12 bảng + khóa ngoại (bảng trung gian + `yeuthich` có `ON DELETE CASCADE`).
 * Bảng `baihat` có cột `luotnghe`; `taikhoan` có cột `vaitro` (Admin/User).
-* Seed dữ liệu mẫu (bài hát, ca sĩ, album, chủ đề, thể loại, playlist, các junction, 2 tài khoản đã hash BCrypt: admin/123 vai trò Admin, huyen/123456 vai trò User).
+* Seed dữ liệu mẫu (bài hát, ca sĩ, album, chủ đề, thể loại, playlist, các bảng trung gian, 2 tài khoản: admin/123 vai trò Admin, huyen/123456 vai trò User).
 
 ### Bước 3. Cấu hình chuỗi kết nối
 
@@ -197,10 +196,10 @@ Mở http://localhost:5258
 
 # 6. Tài khoản thử nghiệm
 
-| Vai trò       | Tài khoản | Mật khẩu  | Ghi chú              |
-| ------------- | --------- | --------- | -------------------- |
-| Quản trị viên | `admin`   | `123`     | hash BCrypt trong seed |
-| Người dùng    | `huyen`   | `123456`  | hash BCrypt trong seed |
+| Vai trò       | Tài khoản | Mật khẩu  |
+| ------------- | --------- | --------- |
+| Quản trị viên | `admin`   | `123`     |
+| Người dùng    | `huyen`   | `123456`  |
 
 Tài khoản trên đã được tạo sẵn trong `setup/csdl.sql`. Có thể tạo thêm tài khoản mới thông qua chức năng **Đăng ký**.
 
@@ -236,7 +235,7 @@ Sau quá trình thực hiện, nhóm đã hoàn thành các nội dung sau:
 * Hoàn thiện giao diện người dùng (Bootstrap dark theme, responsive) và khu quản trị (Bootstrap light theme).
 * Tích hợp chức năng phát nhạc trực tuyến bằng HTML5 Audio.
 * Hỗ trợ tìm kiếm trên 6 thực thể với 1 từ khóa.
-* Xác thực cookie + mã hóa mật khẩu BCrypt.
+* Xác thực cookie.
 * Hoàn thiện báo cáo đồ án và tài liệu hướng dẫn cài đặt.
 
 ---

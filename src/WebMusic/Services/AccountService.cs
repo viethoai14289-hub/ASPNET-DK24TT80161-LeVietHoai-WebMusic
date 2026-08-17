@@ -19,20 +19,10 @@ public interface IAccountService
 
 public class AccountService : IAccountService
 {
-    private static string Hash(string matKhau) => BCrypt.Net.BCrypt.HashPassword(matKhau);
-
     public bool Validate(string tenDangNhap, string matKhau)
     {
         var tk = GetByUsername(tenDangNhap);
-        if (tk is null || string.IsNullOrEmpty(tk.MatKhau)) return false;
-
-        if (!tk.MatKhau.StartsWith("$2"))
-        {
-            if (tk.MatKhau != matKhau) return false;
-            UpdateHash(tk.Id, Hash(matKhau));
-            return true;
-        }
-        return BCrypt.Net.BCrypt.Verify(matKhau, tk.MatKhau);
+        return tk is not null && tk.MatKhau == matKhau;
     }
 
     public TaiKhoan? GetByTenDangNhap(string tenDangNhap) => GetByUsername(tenDangNhap);
@@ -49,7 +39,7 @@ public class AccountService : IAccountService
         using var cmd = new SqlCommand(
             "INSERT INTO taikhoan (tendangnhap, matkhau, vaitro) VALUES (@u, @p, @v)", con);
         cmd.Parameters.AddWithValue("@u", tenDangNhap);
-        cmd.Parameters.AddWithValue("@p", Hash(matKhau));
+        cmd.Parameters.AddWithValue("@p", matKhau);
         cmd.Parameters.AddWithValue("@v", string.IsNullOrWhiteSpace(vaiTro) ? "User" : vaiTro);
         cmd.ExecuteNonQuery();
         return true;
@@ -95,7 +85,7 @@ public class AccountService : IAccountService
             using var cmd = new SqlCommand(
                 "UPDATE taikhoan SET tendangnhap=@u, matkhau=@p, vaitro=@v WHERE id=@id", con);
             cmd.Parameters.AddWithValue("@u", tk.TenDangNhap);
-            cmd.Parameters.AddWithValue("@p", Hash(newMatKhau));
+            cmd.Parameters.AddWithValue("@p", newMatKhau);
             cmd.Parameters.AddWithValue("@v", tk.VaiTro);
             cmd.Parameters.AddWithValue("@id", tk.Id);
             cmd.ExecuteNonQuery();
@@ -108,16 +98,6 @@ public class AccountService : IAccountService
             cmd.Parameters.AddWithValue("@id", tk.Id);
             cmd.ExecuteNonQuery();
         }
-    }
-
-    private void UpdateHash(int id, string hash)
-    {
-        using var con = Db.CreateConnection();
-        con.Open();
-        using var cmd = new SqlCommand("UPDATE taikhoan SET matkhau=@p WHERE id=@id", con);
-        cmd.Parameters.AddWithValue("@p", hash);
-        cmd.Parameters.AddWithValue("@id", id);
-        cmd.ExecuteNonQuery();
     }
 
     public void Delete(int id)

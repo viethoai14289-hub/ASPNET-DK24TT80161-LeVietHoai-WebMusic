@@ -1,7 +1,7 @@
 /* =====================================================================
    CSDL: Nhaccuatui - Website nghe nhac truc tuyen (SQL Server)
    ASP.NET Core 8 MVC + ADO.NET. Ten bang & cot khup voi ma nguon src/WebMusic/.
-   Mat khau luu dang BCrypt hash (cot matkhau nvarchar(100)).
+   Mat khau luu trong cot matkhau nvarchar(100).
    Cach dung: sqlcmd -S . -i setup/csdl.sql  (hoac mo SSMS -> chay toan bo).
    ===================================================================== */
 
@@ -103,7 +103,7 @@ CREATE TABLE playlist_baihat (
 );
 GO
 
--- mat khau nvarchar(100) chua hash BCrypt; tao truoc yeuthich
+-- tao truoc yeuthich
 CREATE TABLE taikhoan (
     id           INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     tendangnhap  NVARCHAR(30)  NOT NULL,
@@ -200,12 +200,10 @@ INSERT INTO playlist_baihat (maplaylist, mabaihat) VALUES
 (3, 2), (3, 3), (3, 7);
 GO
 
--- BCrypt hash workFactor 11. admin/123, huyen/123456
+-- admin/123, huyen/123456
 INSERT INTO taikhoan (tendangnhap, matkhau, vaitro) VALUES
-('admin',
- '$2a$11$PaMQhBC0Ulw4Je7ak8XLZuGF8U9CNlxXCQFhuOoEU2m3e/dIvn31S', 'Admin'),
-('huyen',
- '$2a$11$KW0i11JHl1oDSp7HWjuTXuiRAQ92URwTtKulBZE4r2EHoeH6yi6JO', 'User');
+('admin', '123', 'Admin'),
+('huyen', '123456', 'User');
 GO
 
 PRINT N'>> Tao CSDL Nhaccuatui va du lieu mau thanh cong!';
