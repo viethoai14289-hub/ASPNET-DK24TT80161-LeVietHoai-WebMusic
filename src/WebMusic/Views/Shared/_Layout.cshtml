@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg musico-header sticky-top py-0">
+    <nav class="navbar navbar-expand-xl musico-header sticky-top py-0">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
                 <img src="~/images/logo.svg" alt="NCT" height="34" />
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+            <button class="navbar-toggler border-0 wm-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav musico-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse wm-nav-collapse" id="mainNav">
+                <ul class="navbar-nav musico-nav me-xl-auto mb-2 mb-xl-0">
                     <li class="nav-item"><a class="nav-link" asp-controller="BaiHat" asp-action="Index">Bài hát</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="BaiHat" asp-action="Top">Top thịnh hành</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="ChuDe" asp-action="Index">Chủ đề</a></li>
@@ -29,7 +29,7 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="CaSi" asp-action="Index">Ca sĩ</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Playlist" asp-action="Index">Playlist</a></li>
                 </ul>
-                <div class="d-flex align-items-center gap-3 flex-wrap ms-lg-auto">
+                <div class="d-flex align-items-center gap-2 gap-xl-3 flex-wrap wm-nav-actions ms-xl-auto">
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                         <div class="dropdown wm-user-menu">
@@ -47,13 +47,13 @@
                     }
                     else
                     {
-                        <a class="btn wm-btn-outline" asp-controller="Account" asp-action="Login">Đăng nhập</a>
+                        <a class="btn wm-btn-outline wm-nav-auth" asp-controller="Account" asp-action="Login">Đăng nhập</a>
                     }
                     <form class="d-flex wm-search" asp-controller="Search" asp-action="Index" method="get" role="search">
                         <input class="form-control me-2" type="search" name="q" placeholder="Tìm bài hát, ca sĩ, album..." aria-label="Tìm kiếm" />
                         <button class="btn wm-btn" type="submit">Tìm</button>
                     </form>
-                    <div class="d-none d-lg-flex musico-social gap-2">
+                    <div class="d-none d-xxl-flex musico-social gap-2 wm-nav-social">
                         <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
                         <a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.4 12 31 31 0 0 0 23 7.5zM9.8 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg></a>
                         <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.8-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/></svg></a>

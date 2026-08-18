@@ -40,6 +40,30 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .musico-footer-title, .musico-section-tit
 .wm-user-dropdown .dropdown-divider { border-color: #2a2a2a; }
 @media (max-width: 991px) { .wm-search { width: 100%; margin-top: .5rem; } }
 
+/* menu responsive */
+.musico-header .container { max-width: 100%; padding-left: 1rem; padding-right: 1rem; }
+.wm-toggler { padding: .25rem .5rem; }
+.wm-nav-collapse { transition: height .25s ease; }
+.wm-nav-actions { row-gap: .75rem; }
+.wm-nav-auth { white-space: nowrap; }
+
+@media (max-width: 1199.98px) {
+    .musico-header { min-height: 60px; }
+    .musico-header .navbar-brand img { height: 30px; }
+    .wm-nav-collapse { padding: .75rem 0; border-top: 1px solid #1a1a1a; margin-top: .5rem; }
+    .musico-nav { width: 100%; }
+    .musico-nav .nav-link { padding: 10px 6px !important; border-bottom: 1px solid #1a1a1a; }
+    .musico-nav .nav-item:last-child .nav-link { border-bottom: 0; }
+    .wm-nav-actions { width: 100%; margin-top: .75rem; padding-top: .75rem; border-top: 1px solid #1a1a1a; }
+    .wm-search { flex: 1 1 100%; order: 3; }
+    .wm-nav-social { display: none !important; }
+}
+
+@media (min-width: 1200px) {
+    .musico-nav .nav-link { padding: 18px 10px !important; }
+    .wm-nav-actions { flex-wrap: nowrap; }
+}
+
 .musico-slider { position: relative; min-height: 480px; display: flex; align-items: center; background: url("../images/slideshow/pic1.jpg") center/cover; margin-bottom: 2rem; }
 .musico-slider::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.4), #121212); }
 .musico-slider > .container { position: relative; z-index: 1; }

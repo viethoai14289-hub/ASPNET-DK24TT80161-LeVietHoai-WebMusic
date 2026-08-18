@@ -42,6 +42,12 @@ Website nghe nhạc trực tuyến cho phép người dùng nghe nhạc, tìm ki
 
 ---
 
+## Giao diện trang chủ
+
+![Giao diện trang chủ](screenshot/home.png)
+
+---
+
 # 2. Chức năng chính
 
 ## Người dùng (Frontend)

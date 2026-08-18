@@ -146,7 +146,7 @@ GO
 INSERT INTO casi (tencasi, namsinh, hinhanh, quequan, motathem) VALUES
 (N'Thanh Hùng',    1992, '1.jpg', N'Hải Dương', N'Ca sĩ trẻ thể loại pop ballad.'),
 (N'MIN',           1988, '2.jpg', N'Hà Nội',    N'Ca sĩ tự sáng tác, indie pop.'),
-(N'Erik',          1997, '3.jpg', N'Hà Nội',   N'Ca sĩ V-Pop, ballad và dance.'),
+(N'Erik',          1997, '3.webp', N'Hà Nội',   N'Ca sĩ V-Pop, ballad và dance.'),
 (N'Sơn Tùng M-TP', 1994, '4.jpg', N'Hải Phòng', N'Ca sĩ R&B, V-Pop hàng đầu.');
 GO
 

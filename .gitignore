@@ -63,3 +63,7 @@ project.lock.json
 *.rsuser
 *.suo
 *.user
+## -- Node.js (Playwright screenshot) --
+node_modules/
+package-lock.json
+.npm/
